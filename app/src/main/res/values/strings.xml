@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EasyGuincheiro</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tela_inicial">Tela Inicial</string>
+    <string name="title_activity_recepcao_de_sinistro">RecepcaoDeSinistro</string>
+    <string name="title_activity_rota">Minha Localizacao</string>
+</resources>
