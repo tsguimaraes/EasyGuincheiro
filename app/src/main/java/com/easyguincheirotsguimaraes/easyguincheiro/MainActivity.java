@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecepcaoDeSinistro.class);
+                Intent intent = new Intent(MainActivity.this, TelaInicial.class);
                 startActivity(intent);
                 v.animate();
 
