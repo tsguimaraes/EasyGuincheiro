@@ -12,5 +12,4 @@ public interface ServicoJSON {
     // Parte final da url
     @GET("/clientes/")
     void getGuincho(Callback<List<GuinchoNegocio>> callback);
-
 }

@@ -5,7 +5,7 @@ package com.easyguincheirotsguimaraes.easyguincheiro;
  */
 public class GuinchoNegocio {
 
-    private int id;//Guincho;          // ID do veículo do guincho
+    private int idGuincho;//Guincho;          // ID do veículo do guincho
     private String modeloGuincho;   // Modelo do veículo do guincho
     private String marcaGuincho;    // Marca do veículo do guincho
     private String anttGuincho;     // Código da Agência Nacional de Transportes Terrestres
@@ -13,16 +13,12 @@ public class GuinchoNegocio {
     private String corGuincho;      // Cor do veículo do guincho
     private String statusGuincho;   // Status do Guincho 1- Disponível 2- Ocupado
 
-    public GuinchoNegocio(int id) {
-        this.id = id;
+    public int getIdGuincho() {
+        return idGuincho;
     }
 
-    public int id() {
-        return id;
-    }
-
-    public void setIdGuincho(int id) {
-        this.id = id;
+    public void setIdGuincho(int idGuincho) {
+        this.idGuincho = 80; //idGuincho;
     }
 
     public String getModeloGuincho() {
@@ -68,7 +64,7 @@ public class GuinchoNegocio {
     @Override
     public String toString() {
         return "GuinchoNegocio{" +
-                "idGuincho=" + id +
+                "idGuincho=" + idGuincho +
                 ", modeloGuincho='" + modeloGuincho + '\'' +
                 ", marcaGuincho='" + marcaGuincho + '\'' +
                 ", anttGuincho='" + anttGuincho + '\'' +

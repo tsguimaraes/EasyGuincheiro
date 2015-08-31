@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -19,11 +20,13 @@ import retrofit.client.Response;
 
 public class TelaInicial extends AppCompatActivity {
 
+    private TextView textViewResultado;
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
     // Caso ocorra erro irá apresentar neste texto
     //TextView textViewResultado;
     TextView resultadoTextView;
+    ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
 
     //private Button acordar;
 
@@ -38,12 +41,18 @@ public class TelaInicial extends AppCompatActivity {
                                       .setEndpoint(url)
                                       .build();
         ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
-
-        GuinchoNegocio gn = new GuinchoNegocio(80);
-
         servicoJSON.getGuincho(new Callback<List<GuinchoNegocio>>() {
             @Override
             public void success(List<GuinchoNegocio> guinchoNegocios, Response response) {
+                // Chama a tela de Recepção de sinistro (aceitação).
+
+                for (int i = 0; i < guinchoNegocios.size(); i++){
+                    GuinchoNegocio atual = new GuinchoNegocio();
+
+                    atual.setIdGuincho(guinchoNegocios.get(i).getIdGuincho());
+
+                    arrayList.add(atual);
+                }
 
                 Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
                 startActivity(i);
@@ -56,22 +65,13 @@ public class TelaInicial extends AppCompatActivity {
                                           ", Causas: Sem acesso a internet ou caminho inválido, contate-nos (11)99516-4955.");// + retrofitError.getMessage());
             }
         });
-        // Apenas está passando direto para a tela de aceitação pois a lógica de novas requisições ainda não foi implementada
-       // Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-       // startActivity(i);
-        // Chamada manual para não passar direto pela tela, excluir o botão ACORDAR.
-        // Chama a tela de aguardo
-       /* acordar = (Button) findViewById(R.id.buttonAcorda);
-        acordar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-                startActivity(intent);
-                v.animate();
 
-            }
-        });
-   */
+        if (arrayList.size() > 0 ){
+
+            textViewResultado.setText(arrayList.get(0).getIdGuincho());
+
+        }
+
     }
 
     @Override
