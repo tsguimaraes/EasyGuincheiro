@@ -1,11 +1,14 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
-import android.content.Intent;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +23,12 @@ import retrofit.client.Response;
 
 public class TelaInicial extends AppCompatActivity {
 
+    int validar;
     private TextView textViewResultado;
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
-    // Caso ocorra erro irá apresentar neste texto
-    //TextView textViewResultado;
-    TextView resultadoTextView;
+
+    TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
 
     //private Button acordar;
@@ -36,6 +39,12 @@ public class TelaInicial extends AppCompatActivity {
         setContentView(R.layout.activity_tela_inicial);
         resultadoTextView = (TextView) findViewById(R.id.textViewResultado);
 
+        // Verifica se há conxão
+        if (!connectInternet()){
+            Toast.makeText(this,"Verifique a sua conexão",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        validar = 0;
         // Chamada da classe JSON
         RestAdapter restAdapter = new RestAdapter.Builder()
                                       .setEndpoint(url)
@@ -50,12 +59,32 @@ public class TelaInicial extends AppCompatActivity {
                     GuinchoNegocio atual = new GuinchoNegocio();
 
                     atual.setIdGuincho(guinchoNegocios.get(i).getIdGuincho());
+                    atual.setModeloGuincho(guinchoNegocios.get(i).getModeloGuincho());
+                    atual.setAnttGuincho(guinchoNegocios.get(i).getAnttGuincho());
+                    atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
+                    atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
+                    atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
+
 
                     arrayList.add(atual);
+
                 }
 
-                Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-                startActivity(i);
+                if (arrayList.size() > 0 ){
+
+                    Toast.makeText(TelaInicial.this, "Deu certo!", Toast.LENGTH_SHORT).show();
+                    return;
+                    //textViewResultado.setText(String.valueOf(arrayList.get(0).getIdGuincho()));
+                    // Chamada da tela de recepçao de sinistro
+                    //Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                    //startActivity(i);
+
+                }
+
+
+                // Chamada da tela de recepçao de sinistro
+                //Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                //startActivity(i);
             }
 
             @Override
@@ -64,14 +93,20 @@ public class TelaInicial extends AppCompatActivity {
                 resultadoTextView.setText("Não foi possível encontrar o caminho http" +
                                           ", Causas: Sem acesso a internet ou caminho inválido, contate-nos (11)99516-4955.");// + retrofitError.getMessage());
             }
+
         });
 
-        if (arrayList.size() > 0 ){
+    }
 
-            textViewResultado.setText(arrayList.get(0).getIdGuincho());
-
+    public boolean connectInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()){
+            return true;
         }
-
+        else{
+            return false;
+        }
     }
 
     @Override

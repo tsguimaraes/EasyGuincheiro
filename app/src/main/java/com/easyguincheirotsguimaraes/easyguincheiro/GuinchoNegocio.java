@@ -17,47 +17,58 @@ public class GuinchoNegocio {
         return idGuincho;
     }
 
-    public void setIdGuincho(int idGuincho) {
-        this.idGuincho = 80; //idGuincho;
+    public void setIdGuincho(int idGuincho)
+    {
+        this.idGuincho = idGuincho;
     }
 
     public String getModeloGuincho() {
+
         return modeloGuincho;
     }
 
     public void setModeloGuincho(String modeloGuincho) {
+
         this.modeloGuincho = modeloGuincho;
     }
 
     public String getMarcaGuincho() {
+
         return marcaGuincho;
     }
 
     public void setMarcaGuincho(String marcaGuincho) {
+
         this.marcaGuincho = marcaGuincho;
     }
 
     public String getAnttGuincho() {
+
         return anttGuincho;
     }
 
     public void setAnttGuincho(String anttGuincho) {
+
         this.anttGuincho = anttGuincho;
     }
 
     public String getPlacaGuincho() {
+
         return placaGuincho;
     }
 
     public void setPlacaGuincho(String placaGuincho) {
+
         this.placaGuincho = placaGuincho;
     }
 
     public String getCorGuincho() {
+
         return corGuincho;
     }
 
     public void setCorGuincho(String corGuincho) {
+
         this.corGuincho = corGuincho;
     }
 
