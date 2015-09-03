@@ -12,6 +12,7 @@ public class GuinchoNegocio {
     private String placaGuincho;    // Placa do veículo do guincho
     private String corGuincho;      // Cor do veículo do guincho
     private String statusGuincho;   // Status do Guincho 1- Disponível 2- Ocupado
+    public int selecionado;
 
     public int getId() {
 
@@ -97,9 +98,10 @@ public class GuinchoNegocio {
         //}
     }
 
-    public void escolheGuincho(){
+    public int escolheGuincho(){
 
-        int selecionado = 5; // Parametro
+        selecionado = 5; // Parametro
+        return  selecionado;
 
         }
 

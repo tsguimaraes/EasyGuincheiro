@@ -27,7 +27,7 @@ public class TelaInicial extends AppCompatActivity {
     //int validar;
     private TextView textViewResultado;
     public String verificaStatus;
-    int idDoGuincheiro = (5)-1; // ID do guincheiro optido no momento do Login
+    int idDoGuincheiro = (15)-1; // ID do guincheiro optido no momento do Login
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
 
@@ -73,13 +73,19 @@ public class TelaInicial extends AppCompatActivity {
 
                 }
                 /*Verifica se tem objeto no JSON */
-                if (arrayList.size() > 0 ){
+                if (arrayList.size() > 0 && arrayList.size() >=  idDoGuincheiro)
+                        //String.valueOf(arrayList.get(idDoGuincheiro).getId()) != null )
+                {
+
+                    //if ((String.valueOf(arrayList.get(idDoGuincheiro).getId())) .equals(4))
+                            //.equals ((String.valueOf(arrayList.get(idDoGuincheiro).getId()))))
+
                     /*Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
                     *
                     * */
                     //Toast.makeText(TelaInicial.this, "Deu certo!", Toast.LENGTH_SHORT).show();
                     //resultadoTextView.setText(guinchoNegocios.toString());
-                    resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).getId()));
+                    //resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).getId())); // Está funcionando
                      //if (resultadoTextView.setText(guinchoNegocios.toString()) == );
                     //textViewResultado.setText(String.valueOf(arrayList.get(9).getIdGuincho()));
                     /*textViewResultado.setText(String.valueOf(arrayList.get(0).getModeloGuincho()));
@@ -88,9 +94,9 @@ public class TelaInicial extends AppCompatActivity {
                     textViewResultado.setText(String.valueOf(arrayList.get(0).getMarcaGuincho()));
                     textViewResultado.setText(String.valueOf(arrayList.get(0).getPlacaGuincho()));*/
                     // Chamada da tela de recepçao de sinistro
-                    // Chamada da tela de recepçao de sinistro
                     Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
                     startActivity(i);
+
                 }
 
             }
