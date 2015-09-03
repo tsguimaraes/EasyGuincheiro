@@ -5,7 +5,7 @@ package com.easyguincheirotsguimaraes.easyguincheiro;
  */
 public class GuinchoNegocio {
 
-    private int idGuincho;//Guincho;          // ID do veículo do guincho
+    private int id;//idGuincho;//Guincho;          // ID do veículo do guincho
     private String modeloGuincho;   // Modelo do veículo do guincho
     private String marcaGuincho;    // Marca do veículo do guincho
     private String anttGuincho;     // Código da Agência Nacional de Transportes Terrestres
@@ -13,13 +13,14 @@ public class GuinchoNegocio {
     private String corGuincho;      // Cor do veículo do guincho
     private String statusGuincho;   // Status do Guincho 1- Disponível 2- Ocupado
 
-    public int getIdGuincho() {
-        return idGuincho;
+    public int getId() {
+
+        return id;
     }
 
-    public void setIdGuincho(int idGuincho)
+    public void setId(int id)
     {
-        this.idGuincho = idGuincho;
+        this.id = id;
     }
 
     public String getModeloGuincho() {
@@ -74,6 +75,8 @@ public class GuinchoNegocio {
 
     @Override
     public String toString() {
+        // Original, voltar
+        /*
         return "GuinchoNegocio{" +
                 "idGuincho=" + idGuincho +
                 ", modeloGuincho='" + modeloGuincho + '\'' +
@@ -83,5 +86,24 @@ public class GuinchoNegocio {
                 ", corGuincho='" + corGuincho + '\'' +
                 ", statusGuincho='" + statusGuincho + '\'' +
                 '}';
+                */
+        // Retorna para o display.
+        //if (id == 5 ) //&& equals(id))
+        //{
+            return ""+id;
+        //}
+       //else {
+        //    return modeloGuincho;
+        //}
     }
-}
+
+    public void escolheGuincho(){
+
+        int selecionado = 5; // Parametro
+
+        }
+
+//        GuinchoNegocio gn = new
+
+    }
+
