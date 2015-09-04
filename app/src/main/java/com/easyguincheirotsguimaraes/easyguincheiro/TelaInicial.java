@@ -27,7 +27,7 @@ public class TelaInicial extends AppCompatActivity {
     //int validar;
     private TextView textViewResultado;
     public String verificaStatus;
-    int idDoGuincheiro = (15)-1; // ID do guincheiro optido no momento do Login
+    int idDoGuincheiro = (8)-1; // ID do guincheiro optido no momento do Login
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
 
@@ -104,8 +104,7 @@ public class TelaInicial extends AppCompatActivity {
             @Override
             public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
                                                               // E veja a mensagem que o retrofit retorna
-                resultadoTextView.setText("Não foi possível encontrar o caminho http" +
-                                          ", Causas: Sem acesso a internet ou caminho inválido, contate-nos (11)99516-4955.");// + retrofitError.getMessage());
+                resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt.");// + retrofitError.getMessage());
             }
 
         });
