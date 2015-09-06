@@ -1,12 +1,14 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /* Classe principal de login
  O intuito desta classe e fazer a chamada de validação de login,
@@ -19,13 +21,24 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonEntrar;
+    EditText emailText;
+    EditText senha;
+    TextView textViewName,textViewAge,textViewword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+
+        emailText = (EditText) findViewById(R.id.codigoText);
+
+        senha = (EditText) findViewById(R.id.senha);
+
+
         // Ao clicar no botão entrar, chamará a tela de recepção de sinistro
+        /*
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
         buttonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,8 +49,53 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        */
     }
+//        @Override
+        public void onClick(View view) {
+
+            final String Name = emailText.getText().toString();
+
+            final String word = senha.getText().toString();
+
+            if (Name.length() == 0)
+
+            {
+                emailText.requestFocus();
+                emailText.setError("O campo código deve ser preenchido");
+            }
+            /*
+            else if(!Name.matches("[a-zA-Z ]+"))
+            {
+                emailText.requestFocus();
+                emailText.setError("ENTER ONLY ALPHABETICAL CHARACTER");
+            }
+            */
+            else if (word.length() == 0) {
+                senha.requestFocus();
+                senha.setError("Informe a senha");
+            } else {
+                //Toast.makeText(MainActivity.this, "Campos preenchodos", Toast.LENGTH_LONG).show();
+
+                // Chamada da tela inicial
+
+                buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+                buttonEntrar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, TelaInicial.class);
+                        startActivity(intent);
+                        v.animate();
+
+                    }
+                });
+
+                // Fim da chamda
+
+            }
+        }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

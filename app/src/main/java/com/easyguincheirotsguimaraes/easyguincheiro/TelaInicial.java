@@ -108,7 +108,6 @@ public class TelaInicial extends AppCompatActivity {
             }
 
         });
-
     }
 
     public boolean connectInternet(){
