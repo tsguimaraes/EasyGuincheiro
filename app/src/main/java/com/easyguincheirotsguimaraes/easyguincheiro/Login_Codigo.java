@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /* Classe principal de login
  O intuito desta classe e fazer a chamada de validação de login,
@@ -18,23 +19,23 @@ import android.widget.TextView;
  Para o mantenedor do sistema, cadastre os dados da empresa de guincho e avalie a reputação dela,
  antes de se associar ao Easy Guincho.
 */
-public class MainActivity extends AppCompatActivity {
+public class Login_Codigo extends AppCompatActivity {
 
     private Button buttonEntrar;
-    EditText emailText;
-    EditText senha;
+    EditText codigo; // Código
+    //EditText senha;
     TextView textViewName,textViewAge,textViewword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_codigo);
 
-        buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+        buttonEntrar = (Button) findViewById(R.id.entrar_codigo);
 
-        emailText = (EditText) findViewById(R.id.codigoText);
+        codigo = (EditText) findViewById(R.id.codigoText);
 
-        senha = (EditText) findViewById(R.id.senha);
+        //senha = (EditText) findViewById(R.id.senha);
 
 
         // Ao clicar no botão entrar, chamará a tela de recepção de sinistro
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TelaInicial.class);
+                Intent intent = new Intent(Login_Codigo.this, TelaInicial.class);
                 startActivity(intent);
                 v.animate();
 
@@ -51,45 +52,53 @@ public class MainActivity extends AppCompatActivity {
         });
         */
     }
-//        @Override
+        // Valida se os campos estão vazios antes de entrar
         public void onClick(View view) {
 
-            final String Name = emailText.getText().toString();
+            final String codigoText = codigo.getText().toString();
 
-            final String word = senha.getText().toString();
+            //final String senhaGuincheiro = senha.getText().toString();
 
-            if (Name.length() == 0)
+            // Valida campos obrigatórios no login
+            if (codigoText.length() == 0)
 
             {
-                emailText.requestFocus();
-                emailText.setError("O campo código deve ser preenchido");
+                codigo.requestFocus();
+                codigo.setError("Digite um código válido.");
             }
             /*
             else if(!Name.matches("[a-zA-Z ]+"))
             {
-                emailText.requestFocus();
-                emailText.setError("ENTER ONLY ALPHABETICAL CHARACTER");
+                codigo.requestFocus();
+                codigo.setError("ENTER ONLY ALPHABETICAL CHARACTER");
             }
             */
-            else if (word.length() == 0) {
+            /*
+            else if (senhaGuincheiro.length() == 0) {
                 senha.requestFocus();
-                senha.setError("Informe a senha");
-            } else {
-                //Toast.makeText(MainActivity.this, "Campos preenchodos", Toast.LENGTH_LONG).show();
+                senha.setError("O campo senha deve ser preenchido");
+            }
+            */
+            else {
+                //Toast.makeText(Login_Codigo.this, "Campos preenchodos", Toast.LENGTH_LONG).show();
+                // verificação se o código existe, onde está Thiago, colocar o campo do BD/ws
+                if (codigoText.equals("thiago")) {
+                    // Chamada da tela inicial
 
-                // Chamada da tela inicial
+                    //buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+                    //buttonEntrar.setOnClickListener(new View.OnClickListener() {
+                      //  @Override
+                       // public void onClick(View v) {
+                            Intent intent = new Intent(Login_Codigo.this, Login_Placa.class);
+                            startActivity(intent);
+                         //   v.animate();
 
-                buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
-                buttonEntrar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, TelaInicial.class);
-                        startActivity(intent);
-                        v.animate();
-
-                    }
-                });
-
+                        //}
+                    //});
+                }
+                else {
+                    Toast.makeText(Login_Codigo.this, "Código inválido.", Toast.LENGTH_LONG).show();
+                }
                 // Fim da chamda
 
             }

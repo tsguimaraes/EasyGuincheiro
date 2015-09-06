@@ -6,4 +6,5 @@
     <string name="title_activity_tela_inicial">Tela Inicial</string>
     <string name="title_activity_recepcao_de_sinistro">RecepcaoDeSinistro</string>
     <string name="title_activity_rota">Minha Localizacao</string>
+    <string name="title_activity_login__placa">Login Placa</string>
 </resources>

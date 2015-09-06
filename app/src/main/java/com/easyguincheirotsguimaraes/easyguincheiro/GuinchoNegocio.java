@@ -12,8 +12,9 @@ public class GuinchoNegocio {
     private String placaGuincho;                   // Placa do veículo do guincho
     private String corGuincho;                     // Cor do veículo do guincho
     private String statusGuincho;                  // Status do Guincho 1- Disponível 2- Ocupado
-    private double latitudeCliente;                // Latitude do Guincho
-    private double longitudeCliente;               // Longitude do Guincho
+    //criar método para atualizar a localização em tempo real, e gerar um arquivo post que não retorna para o webservice.
+    private double latitudeCliente;                // Latitude do Guincho,
+    private double longitudeCliente;               // Longitude do Guincho, criar método para atualizar a localização em tempo real
     private String bairro;                         // Bairro cliente
     private String endereco;                       // Endereço do cliente
     private String distancia;                      // Distancia do guincho para o cliente

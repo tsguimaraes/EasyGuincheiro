@@ -27,7 +27,7 @@ public class TelaInicial extends AppCompatActivity {
     //int validar;
     private TextView textViewResultado;
     public String verificaStatus;
-    int idDoGuincheiro = (8)-1; // ID do guincheiro optido no momento do Login
+    int idDoGuincheiro = (8)-1; // ID do guincheiro obtido no momento do Login
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
 

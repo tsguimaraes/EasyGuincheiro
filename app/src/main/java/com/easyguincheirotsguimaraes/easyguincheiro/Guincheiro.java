@@ -5,9 +5,9 @@ package com.easyguincheirotsguimaraes.easyguincheiro;
  */
 public class Guincheiro {
     private int idGuincheiro;
-    private int nomeGuincheiro;
-    private int codigoGuincheiro;
-    private int senhaGuincheiro;
+    private String nomeGuincheiro;
+    private String codigoGuincheiro;
+    private String placaGuincho;
 
     public int getIdGuincheiro() {
         return idGuincheiro;
@@ -17,37 +17,37 @@ public class Guincheiro {
         this.idGuincheiro = idGuincheiro;
     }
 
-    public int getNomeGuincheiro() {
+    public String getNomeGuincheiro() {
         return nomeGuincheiro;
     }
 
-    public void setNomeGuincheiro(int nomeGuincheiro) {
+    public void setNomeGuincheiro(String nomeGuincheiro) {
         this.nomeGuincheiro = nomeGuincheiro;
     }
 
-    public int getCodigoGuincheiro() {
+    public String getCodigoGuincheiro() {
         return codigoGuincheiro;
     }
 
-    public void setCodigoGuincheiro(int codigoGuincheiro) {
+    public void setCodigoGuincheiro(String codigoGuincheiro) {
         this.codigoGuincheiro = codigoGuincheiro;
     }
 
-    public int getSenhaGuincheiro() {
-        return senhaGuincheiro;
+    public String getplacaGuincho() {
+        return placaGuincho;
     }
 
-    public void setSenhaGuincheiro(int senhaGuincheiro) {
-        this.senhaGuincheiro = senhaGuincheiro;
+    public void setplacaGuincho(String placaGuincho) {
+        this.placaGuincho = placaGuincho;
     }
 
     @Override
     public String toString() {
         return "Guincheiro{" +
                 "idGuincheiro=" + idGuincheiro +
-                ", nomeGuincheiro=" + nomeGuincheiro +
-                ", codigoGuincheiro=" + codigoGuincheiro +
-                ", senhaGuincheiro=" + senhaGuincheiro +
+                ", nomeGuincheiro='" + nomeGuincheiro + '\'' +
+                ", codigoGuincheiro='" + codigoGuincheiro + '\'' +
+                ", placaGuincho='" + placaGuincho + '\'' +
                 '}';
     }
 }
