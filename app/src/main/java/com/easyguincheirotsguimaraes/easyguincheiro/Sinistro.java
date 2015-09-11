@@ -13,6 +13,7 @@ public class Sinistro extends AppCompatActivity {
     TextView dadosClienteView;
     private Button pagar;
     private Button cancelarSolicitacao;
+    private Button mapsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,19 @@ public class Sinistro extends AppCompatActivity {
 
             }
         });
+
+        // Chama tela de rota para abrir o maps
+        mapsButton = (Button) findViewById(R.id.buttonMaps);
+        mapsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Sinistro.this, Rota.class);
+                startActivity(intent);
+                v.animate();
+
+            }
+        });
+
 
     }
 

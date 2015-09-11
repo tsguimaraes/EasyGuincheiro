@@ -42,7 +42,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
 
         //habilita botão da minha localização
         // Somente irá pegar a localização atual clicando no botão se tiver permissão para isso (LOCAL).
-        map.setMyLocationEnabled(true);
+        //map.setMyLocationEnabled(true);
 
         //CameraUpdate update = CameraUpdateFactory.newLatLngZoom(LOCATION_BURNABY,BIND_IMPORTANT);// Distância da camera
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL); //Tipo do Mapa
