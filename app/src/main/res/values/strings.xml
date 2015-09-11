@@ -7,4 +7,6 @@
     <string name="title_activity_recepcao_de_sinistro">RecepcaoDeSinistro</string>
     <string name="title_activity_rota">Minha Localizacao</string>
     <string name="title_activity_login__placa">Login Placa</string>
+    <string name="title_activity_sinistro">Sinistro</string>
+    <string name="title_activity_pagamento">Pagamento</string>
 </resources>

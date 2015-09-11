@@ -10,6 +10,7 @@ import retrofit.http.GET;
  */
 public interface ServicoJSON {
     // Parte final da url
+    //@GET("/clientes/")
     @GET("/clientes/")
     void getGuincho(Callback<List<GuinchoNegocio>> callback);
 }

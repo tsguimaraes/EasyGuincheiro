@@ -27,9 +27,11 @@ public class TelaInicial extends AppCompatActivity {
     //int validar;
     private TextView textViewResultado;
     public String verificaStatus;
-    int idDoGuincheiro = (8)-1; // ID do guincheiro obtido no momento do Login
+    int idDoGuincheiro = (7)-1; // ID do guincheiro obtido no momento do Login
     //Caminho do arquivo JSON será o localhost
     public final String url = "http://servicio-monkydevs.rhcloud.com";
+    //10.0.3.2:3310
+    //public final String url = "http://10.0.2.3:3310/EasyGuinchoWS/json/chamados";
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
@@ -73,38 +75,49 @@ public class TelaInicial extends AppCompatActivity {
 
                 }
                 /*Verifica se tem objeto no JSON */
-                if (arrayList.size() > 0 && arrayList.size() >=  idDoGuincheiro)
+                if (arrayList.size() > 0 && arrayList.size() >=  idDoGuincheiro
+                                         && (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
+                                            ((String.valueOf(arrayList.get(idDoGuincheiro).getId()))))
                         //String.valueOf(arrayList.get(idDoGuincheiro).getId()) != null )
                 {
 
-                    //if ((String.valueOf(arrayList.get(idDoGuincheiro).getId())) .equals(4))
-                            //.equals ((String.valueOf(arrayList.get(idDoGuincheiro).getId()))))
+                //    if ((String.valueOf(arrayList.get(idDoGuincheiro).getId())) //.equals(4))
+                //            .equals ((String.valueOf(arrayList.get(idDoGuincheiro).getId())))) {
+
+
 
                     /*Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
                     *
                     * */
-                    //Toast.makeText(TelaInicial.this, "Deu certo!", Toast.LENGTH_SHORT).show();
-                    //resultadoTextView.setText(guinchoNegocios.toString());
-                    //resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).getId())); // Está funcionando
-                     //if (resultadoTextView.setText(guinchoNegocios.toString()) == );
-                    //textViewResultado.setText(String.valueOf(arrayList.get(9).getIdGuincho()));
+                        //Toast.makeText(TelaInicial.this, "Deu certo!", Toast.LENGTH_SHORT).show();
+                        //resultadoTextView.setText(guinchoNegocios.toString());
+                        //resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).getId())); // Está funcionando
+                        //if (resultadoTextView.setText(guinchoNegocios.toString()) == );
+                        //textViewResultado.setText(String.valueOf(arrayList.get(9).getIdGuincho()));
                     /*textViewResultado.setText(String.valueOf(arrayList.get(0).getModeloGuincho()));
-                    textViewResultado.setText(String.valueOf(arrayList.get(0).getAnttGuincho()));
-                    textViewResultado.setText(String.valueOf(arrayList.get(0).getCorGuincho()));
-                    textViewResultado.setText(String.valueOf(arrayList.get(0).getMarcaGuincho()));
-                    textViewResultado.setText(String.valueOf(arrayList.get(0).getPlacaGuincho()));*/
-                    // Chamada da tela de recepçao de sinistro
-                    Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-                    startActivity(i);
-
+                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getAnttGuincho()));
+                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getCorGuincho()));
+                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getMarcaGuincho()));
+                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getPlacaGuincho()));*/
+                        /*resultadoTextView.setText(
+                         "Solicitante: Gabriel Freire Braz \n"
+                        +"Endereço: Avenida Vital Brasil, 50 \n"
+                        +"Distância: 20 km \n"
+                        +"Pagamento: Dinheiro \n"
+                        +"Veículo: Mitsubish L200 \n");*/
+                        //resultadoTextView.setText("Filho da p");
+                        // Chamada da tela de recepçao de sinistro
+                        Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                        startActivity(i);
+                    }
                 }
 
-            }
+        //  }
 
             @Override
             public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
                                                               // E veja a mensagem que o retrofit retorna
-                resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt.");// + retrofitError.getMessage());
+                resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt."+ retrofitError.getMessage());
             }
 
         });

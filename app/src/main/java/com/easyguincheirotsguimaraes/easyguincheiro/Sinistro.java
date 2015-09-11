@@ -9,60 +9,58 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class RecepcaoDeSinistro extends AppCompatActivity {
-    private Button aceitoSolicitacao;
-    private Button naoAceitoSolicitacao;
-    TextView recepcaoView;
-
+public class Sinistro extends AppCompatActivity {
+    TextView dadosClienteView;
+    private Button pagar;
+    private Button cancelarSolicitacao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recepcao_de_sinistro);
-        recepcaoView = (TextView) findViewById(R.id.recepcao);
-        // Dados do solicitante
-        recepcaoView.setText(
-                "Endereço: Avenida Vital Brasil, 50\n"
-                +"Bairro: Butantã \n"
-                +"chegada aproximada: 40 Minutos\n"
-                +"Distância: 20 km\n"
-                +"Pagamento: Dinheiro\n"
-        );
+        setContentView(R.layout.activity_sinistro);
+        dadosClienteView = (TextView) findViewById(R.id.dadosClienteView);
 
-        // Tem por objetivo executar, aceitar a requisição.
+        dadosClienteView.setText(
+                "Cliente: Thiago Santos Guimarães\n"
+                        + "Endereço: Avenida Vital Brasil, 50\n"
+                        + "Bairro: Butantã \n"
+                        + "chegada aproximada: 40 Minutos\n"
+                        + "Distância: 20 km\n"
+                        + "Pagamento: Dinheiro\n");
 
-        // Chamada de tela Sinistro ao aceitar a solicitação de guincho por parte do guincheiro
-        aceitoSolicitacao = (Button) findViewById(R.id.buttonAceito);
-        aceitoSolicitacao.setOnClickListener(new View.OnClickListener() {
+        // Ao clicar em pagar abrirá a tela de pagamento
+
+        pagar = (Button) findViewById(R.id.button_pagar);
+        pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
-                startActivity(intent);
-                v.animate();
-
-            }
-        });
-        // Chama a tela de aguardo
-        naoAceitoSolicitacao = (Button) findViewById(R.id.buttonRecusa);
-        naoAceitoSolicitacao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecepcaoDeSinistro.this, TelaInicial.class);
+                Intent intent = new Intent(Sinistro.this, Pagamento.class);
                 startActivity(intent);
                 v.animate();
 
             }
         });
 
+        // Ao clicar em cancelar, retornará para a telaInicial
 
-        // Tem por objetivo, não aceitar a requisição
+
+        cancelarSolicitacao = (Button) findViewById(R.id.buttonCancelar);
+        cancelarSolicitacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Sinistro.this, TelaInicial.class);
+                startActivity(intent);
+                v.animate();
+
+            }
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_recepcao_de_sinistro, menu);
+        getMenuInflater().inflate(R.menu.menu_sinistro, menu);
         return true;
-
     }
 
     @Override

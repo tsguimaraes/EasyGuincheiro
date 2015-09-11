@@ -57,6 +57,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Login_Codigo" />
         </activity>
+        <activity
+            android:name=".Sinistro"
+            android:label="@string/title_activity_sinistro" >
+        </activity>
+        <activity
+            android:name=".Pagamento"
+            android:label="@string/title_activity_pagamento"
+            android:parentActivityName=".Sinistro" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easyguincheirotsguimaraes.easyguincheiro.Sinistro" />
+        </activity>
     </application>
 
 </manifest>
