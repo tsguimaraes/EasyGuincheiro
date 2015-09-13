@@ -5,7 +5,7 @@ package com.easyguincheirotsguimaraes.easyguincheiro;
  */
 public class GuinchoNegocio {
 
-    private int idGuincho;//Guincho;               // ID do veículo do guincho
+    private int idGuincheiro;//Guincho;               // ID do veículo do guincho
     private String modeloGuincho;                  // Modelo do veículo do guincho
     private String marcaGuincho;                   // Marca do veículo do guincho
     private String anttGuincho;                    // Código da Agência Nacional de Transportes Terrestres
@@ -13,19 +13,19 @@ public class GuinchoNegocio {
     private String corGuincho;                     // Cor do veículo do guincho
     private String statusGuincho;                  // Status do Guincho 1- Disponível 2- Ocupado
     //criar método para atualizar a localização em tempo real, e gerar um arquivo post que não retorna para o webservice.
-    private double latitudeCliente;                // Latitude do Guincho,
-    private double longitudeCliente;               // Longitude do Guincho, criar método para atualizar a localização em tempo real
+    private double latitude;                // Latitude do Guincho,
+    private double longitude;               // Longitude do Guincho, criar método para atualizar a localização em tempo real
     private String bairro;                         // Bairro cliente
     private String endereco;                       // Endereço do cliente
     private String distancia;                      // Distancia do guincho para o cliente
     private String formaDePagamento;
 
     public int getId() {
-        return idGuincho;
+        return idGuincheiro;
     }
 
-    public void setId(int idGuincho) {
-        this.idGuincho = idGuincho;
+    public void setId(int idGuincheiro) {
+        this.idGuincheiro = idGuincheiro;
     }
 
     public String getModeloGuincho() {
@@ -76,20 +76,20 @@ public class GuinchoNegocio {
         this.statusGuincho = statusGuincho;
     }
 
-    public double getLatitudeCliente() {
-        return latitudeCliente;
+    public double getlatitude() {
+        return latitude;
     }
 
-    public void setLatitudeCliente(double latitudeCliente) {
-        this.latitudeCliente = latitudeCliente;
+    public void setlatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public double getLongitudeCliente() {
-        return longitudeCliente;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongitudeCliente(double longitudeCliente) {
-        this.longitudeCliente = longitudeCliente;
+    public void setLongitudeCliente(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getBairro() {
@@ -129,7 +129,7 @@ public class GuinchoNegocio {
         // Original, voltar
         /*
         return "GuinchoNegocio{" +
-                "idGuincho=" + idGuincho +
+                "idGuincheiro=" + idGuincheiro +
                 ", modeloGuincho='" + modeloGuincho + '\'' +
                 ", marcaGuincho='" + marcaGuincho + '\'' +
                 ", anttGuincho='" + anttGuincho + '\'' +
@@ -138,10 +138,9 @@ public class GuinchoNegocio {
                 ", statusGuincho='" + statusGuincho + '\'' +
                 '}';
                 */
-        // Retorna para o display.
-        //if (id == 5 ) //&& equals(id))
-        //{
-            return ""+idGuincho;
+            return "idGuincheiro: "+idGuincheiro+"\n"+
+                    "latitude: "+latitude+"\n"+
+                    "longitude: "+longitude;
         //}
        //else {
         //    return modeloGuincho;

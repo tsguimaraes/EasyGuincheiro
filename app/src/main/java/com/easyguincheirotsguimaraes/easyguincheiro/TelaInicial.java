@@ -27,11 +27,11 @@ public class TelaInicial extends AppCompatActivity {
     //int validar;
     private TextView textViewResultado;
     public String verificaStatus;
-    int idDoGuincheiro = (7)-1; // ID do guincheiro obtido no momento do Login
+    int idDoGuincheiro = (3)-1; // ID do guincheiro obtido no momento do Login
     //Caminho do arquivo JSON será o localhost
-    public final String url = "http://servicio-monkydevs.rhcloud.com";
+    //public final String url = "http://servicio-monkydevs.rhcloud.com";
     //10.0.3.2:3310
-    //public final String url = "http://10.0.2.3:3310/EasyGuinchoWS/json/chamados";
+    public final String url = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
@@ -69,50 +69,35 @@ public class TelaInicial extends AppCompatActivity {
                     atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
                     atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
                     atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
-
+                    atual.setlatitude(guinchoNegocios.get(i).getlatitude());
+                    atual.setLongitudeCliente(guinchoNegocios.get(i).getLongitude());
 
                     arrayList.add(atual);
 
                 }
-                /*Verifica se tem objeto no JSON */
+                /*Verifica se tem objeto no JSON, não permite passar nulo,  */
                 if (arrayList.size() > 0 && arrayList.size() >=  idDoGuincheiro
                                          && (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
                                             ((String.valueOf(arrayList.get(idDoGuincheiro).getId()))))
-                        //String.valueOf(arrayList.get(idDoGuincheiro).getId()) != null )
-                {
-
-                //    if ((String.valueOf(arrayList.get(idDoGuincheiro).getId())) //.equals(4))
-                //            .equals ((String.valueOf(arrayList.get(idDoGuincheiro).getId())))) {
+               {
 
 
 
-                    /*Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
-                    *
-                    * */
-                        //Toast.makeText(TelaInicial.this, "Deu certo!", Toast.LENGTH_SHORT).show();
-                        //resultadoTextView.setText(guinchoNegocios.toString());
-                        //resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).getId())); // Está funcionando
-                        //if (resultadoTextView.setText(guinchoNegocios.toString()) == );
-                        //textViewResultado.setText(String.valueOf(arrayList.get(9).getIdGuincho()));
-                    /*textViewResultado.setText(String.valueOf(arrayList.get(0).getModeloGuincho()));
-                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getAnttGuincho()));
-                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getCorGuincho()));
-                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getMarcaGuincho()));
-                    resultadoTextView.setText(String.valueOf(arrayList.get(0).getPlacaGuincho()));*/
-                        /*resultadoTextView.setText(
-                         "Solicitante: Gabriel Freire Braz \n"
-                        +"Endereço: Avenida Vital Brasil, 50 \n"
-                        +"Distância: 20 km \n"
-                        +"Pagamento: Dinheiro \n"
-                        +"Veículo: Mitsubish L200 \n");*/
-                        //resultadoTextView.setText("Filho da p");
+                    /*Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro*/
+
+                    resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).toString()));
+                    verificaStatus =
+                            "Endereço: Avenida Vital Brasil, 50\n"
+                                    +"Bairro: Butantã \n"
+                                    +"chegada aproximada: 40 Minutos\n"
+                                    +"Distância: 20 km\n"
+                                    +"Pagamento: Dinheiro\n";
+
                         // Chamada da tela de recepçao de sinistro
                         Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
                         startActivity(i);
                     }
                 }
-
-        //  }
 
             @Override
             public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
@@ -154,5 +139,9 @@ public class TelaInicial extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    // pra tela de recepção
+    public String mandaParaTelaSinistro(){
+        return verificaStatus;
     }
 }

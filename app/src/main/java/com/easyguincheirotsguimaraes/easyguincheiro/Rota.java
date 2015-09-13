@@ -49,7 +49,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
         this.findViewById(R.id.mapView);
         // Marcador apontando para a USP
         LatLng sp = new LatLng(-23.562344379612156, -46.73185053882594);
-        map.addMarker(new MarkerOptions().position(sp).title("São Paulo"));
+        map.addMarker(new MarkerOptions().position(sp).title("Seu destino, clique na seta para traçar a rota."));
         map.moveCamera(CameraUpdateFactory.newLatLng(sp));
 
         // ---Pegando a localização maneira manual---

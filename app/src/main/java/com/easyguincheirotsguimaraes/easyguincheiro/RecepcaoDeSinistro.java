@@ -28,6 +28,9 @@ public class RecepcaoDeSinistro extends AppCompatActivity {
                 +"Pagamento: Dinheiro\n"
         );
 
+        //TelaInicial tlIni = new TelaInicial();
+        // Teste para trazer dados da tela inicial para sinistro
+        //recepcaoView.setText(tlIni.mandaParaTelaSinistro());
         // Tem por objetivo executar, aceitar a requisição.
 
         // Chamada de tela Sinistro ao aceitar a solicitação de guincho por parte do guincheiro

@@ -96,13 +96,36 @@ public class Login_Codigo extends AppCompatActivity {
                         //}
                     //});
                 }
-                else {
-                    Toast.makeText(Login_Codigo.this, "Código inválido.", Toast.LENGTH_LONG).show();
+                else if
+
+                    //
+                       (codigoText.equals("masterAjax")) {
+                            // Chamada da tela inicial
+
+                            //buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+                            //buttonEntrar.setOnClickListener(new View.OnClickListener() {
+                            //  @Override
+                            // public void onClick(View v) {
+                            Intent intent = new Intent(Login_Codigo.this, ManutencaoGuincho.class);
+                            startActivity(intent);
+                            //   v.animate();
+
+                            //}
+                            //});
+                        }
+                        else {
+                            Toast.makeText(Login_Codigo.this, "Código inválido.", Toast.LENGTH_LONG).show();
+                        }
+                        // Fim da chamda
+                    }
+
+                    //
+
+                   // Toast.makeText(Login_Codigo.this, "Código inválido.", Toast.LENGTH_LONG).show();
                 }
                 // Fim da chamda
 
-            }
-        }
+
 
 
 
