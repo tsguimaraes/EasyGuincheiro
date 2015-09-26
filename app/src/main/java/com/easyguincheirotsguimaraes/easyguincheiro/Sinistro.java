@@ -1,17 +1,19 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Sinistro extends AppCompatActivity {
     TextView dadosClienteView;
     private Button pagar;
+    public int contador = 1; // Numero de cancelamentos
     private Button cancelarSolicitacao;
     private Button mapsButton;
     @Override
@@ -51,8 +53,15 @@ public class Sinistro extends AppCompatActivity {
                 Intent intent = new Intent(Sinistro.this, TelaInicial.class);
                 startActivity(intent);
                 v.animate();
-
+                // Implementar mais de 3 cancelamentos por dia.
+          if (contador >=3) {
+              Toast.makeText(Sinistro.this, "Acesso bloqueado por 24 horas.", Toast.LENGTH_LONG).show();
+              Intent intent2 = new Intent(Sinistro.this, Login_Codigo.class);
+              startActivity(intent2);
             }
+
+           }
+
         });
 
         // Chama tela de rota para abrir o maps

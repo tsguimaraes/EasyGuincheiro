@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nenhuma solicitação no momento, AGUARDE NOVO CHAMADO."
+        android:text="AGUARDE UM CHAMADO."
         android:id="@+id/textViewResultado"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

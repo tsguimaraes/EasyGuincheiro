@@ -4,12 +4,54 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.easyguincheirotsguimaraes.easyguincheiro.Pagamento">
+    tools:context="com.easyguincheirotsguimaraes.easyguincheiro.Pagamento"
+    android:transitionName="Valor">
+
 
     <TextView
-        android:text="Tela de pagamento em construçao."
+        android:text="Valor do serviço"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pgto" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/valorServText"
+        android:layout_below="@+id/pgto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="54dp"
+        android:transitionName="Valor"
+        android:singleLine="true"
+        android:numeric="decimal"
+        android:linksClickable="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Pagamento"
+        android:id="@+id/salvarServico"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="67dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/cancelarPagamentoServ"
+        android:layout_below="@+id/salvarServico"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/salvarServico"
+        android:layout_alignEnd="@+id/salvarServico" />
 
 </RelativeLayout>

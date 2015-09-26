@@ -48,7 +48,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL); //Tipo do Mapa
         this.findViewById(R.id.mapView);
         // Marcador apontando para a USP
-        LatLng sp = new LatLng(-23.562344379612156, -46.73185053882594);
+        LatLng sp = new LatLng(-23.599160080557642, -46.69948190000002);
         map.addMarker(new MarkerOptions().position(sp).title("Seu destino, clique na seta para traçar a rota."));
         map.moveCamera(CameraUpdateFactory.newLatLng(sp));
 
