@@ -46,7 +46,7 @@ public class Login_Placa extends AppCompatActivity {
         else {
             //Toast.makeText(Login_placa.this, "Campos preenchodos", Toast.LENGTH_LONG).show();
             // verificação se o código existe, onde está Thiago, colocar o campo do BD/ws
-            if (placaText.equals("usjt")) {
+            if (placaText.equals("b")) {
                 // Chamada da tela inicial
 
                 Intent intent = new Intent(Login_Placa.this, TelaInicial.class);

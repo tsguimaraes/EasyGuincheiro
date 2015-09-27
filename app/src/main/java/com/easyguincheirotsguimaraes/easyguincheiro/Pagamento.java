@@ -101,6 +101,7 @@ public class Pagamento extends AppCompatActivity {
     }
     public void onClick(View view) {
 
+        //int valorPago = Integer.parseInt(String.valueOf(valorTotalLocal));
         // Ao clicar em salvar o pagamento
         final String valorServText = valorTotalLocal.getText().toString();
         // Cancelar o processo de pagamento
@@ -114,6 +115,7 @@ public class Pagamento extends AppCompatActivity {
             valorTotalLocal.requestFocus();
             valorTotalLocal.setError("O valor informado é inválido.");
         }
+
         // Sucesso ao fazer o pagamento.
         else {
             // Implementar a chamada ao JSON para enviar o valor pago

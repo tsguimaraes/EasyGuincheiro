@@ -20,6 +20,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
     protected GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //protected GoogleMap errmap;
     private static final String TAG = "livroandroid";
+    float zoomLevel = 16;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +49,10 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL); //Tipo do Mapa
         this.findViewById(R.id.mapView);
         // Marcador apontando para a USP
-        LatLng sp = new LatLng(-23.599160080557642, -46.69948190000002);
-        map.addMarker(new MarkerOptions().position(sp).title("Seu destino, clique na seta para traçar a rota."));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sp));
+        LatLng latitudeAtual = new LatLng(-23.54585280941764, -46.641223000000025);
+        map.addMarker(new MarkerOptions().position(latitudeAtual).title("Seu destino, clique na seta para traçar a rota."));
+        // Passa os parametros de latitude longitude e zoom
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeAtual, zoomLevel));
 
         // ---Pegando a localização maneira manual---
         LocationRequest nLocationRequest = new LocationRequest();
