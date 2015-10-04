@@ -22,12 +22,15 @@ import retrofit.client.Response;
  Esta é uma tela estática que tem o intuito de verificar se há novas solicitações no servidor
  */
 
-public class TelaInicial extends AppCompatActivity {
+public class TelaInicial extends AppCompatActivity{
 
     //int validar;
     private TextView textViewResultado;
+    GuinchoNegocio atual = new GuinchoNegocio();
     public String verificaStatus;
     int idDoGuincheiro = (3)-1; // ID do guincheiro obtido no momento do Login
+    double longitudeLocal = 0.0;
+    double latitudeLocal = 0.0;
     //Caminho do arquivo JSON será o localhost
     //public final String url = "http://servicio-monkydevs.rhcloud.com";
     //10.0.3.2:3310
@@ -37,6 +40,10 @@ public class TelaInicial extends AppCompatActivity {
     ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
 
     //private Button acordar;
+
+    public TelaInicial(){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +68,6 @@ public class TelaInicial extends AppCompatActivity {
                 // Chama a tela de Recepção de sinistro (aceitação).
 
                 for (int i = 0; i < guinchoNegocios.size(); i++){
-                    GuinchoNegocio atual = new GuinchoNegocio();
 
                     atual.setId(guinchoNegocios.get(i).getId());
                     atual.setModeloGuincho(guinchoNegocios.get(i).getModeloGuincho());
@@ -74,14 +80,15 @@ public class TelaInicial extends AppCompatActivity {
 
                     arrayList.add(atual);
 
+                    longitudeLocal = -23.54585280941764;//guinchoNegocios.get(idDoGuincheiro).getlatitude();
+                    latitudeLocal  = -46.641223000000025;//guinchoNegocios.get(idDoGuincheiro).getLongitude();
+
                 }
                 /*Verifica se tem objeto no JSON, não permite passar nulo,  */
                 if (arrayList.size() > 0 && arrayList.size() >=  idDoGuincheiro
                                          && (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
                                             ((String.valueOf(arrayList.get(idDoGuincheiro).getId()))))
                {
-
-
 
                     /*Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro*/
 
@@ -140,6 +147,21 @@ public class TelaInicial extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // Retorna latitude e longitude
+
+    public final Double latitude (){
+
+        return -23.54585280941764;
+        //return latitudeLocal;
+    }
+
+    public final Double longitude (){
+
+        return -46.641223000000025;
+        //return longitudeLocal;
+    }
+
     // pra tela de recepção
     public String mandaParaTelaSinistro(){
         return verificaStatus;
