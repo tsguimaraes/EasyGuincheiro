@@ -82,7 +82,7 @@ public class Login_Codigo extends AppCompatActivity {
             else {
                 //Toast.makeText(Login_Codigo.this, "Campos preenchodos", Toast.LENGTH_LONG).show();
                 // verificação se o código existe, onde está Thiago, colocar o campo do BD/ws
-                if (codigoText.equals("a")) {
+                if (codigoText.equals("codigo")) {
                     // Chamada da tela inicial
 
                     //buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
