@@ -8,26 +8,16 @@
     android:transitionName="Valor">
 
 
-    <TextView
-        android:text="Valor do serviço"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pgto"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/valorServText"
-        android:layout_below="@+id/pgto"
+        android:hint="Valor do serviço R$..."
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:transitionName="Valor"
         android:singleLine="true"
         android:numeric="decimal"

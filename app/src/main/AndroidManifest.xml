@@ -73,14 +73,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easyguincheirotsguimaraes.easyguincheiro.Sinistro" />
         </activity>
-        <activity
-            android:name=".ConsultaGuinchoFrota"
-            android:label="@string/title_activity_consulta_guincho_frota"
-            android:parentActivityName=".ManutencaoGuincho" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.easyguincheirotsguimaraes.easyguincheiro.ManutencaoGuincho" />
-        </activity>
     </application>
 
 </manifest>
