@@ -92,6 +92,12 @@ public class GuinchoNegocio {
         this.longitude = longitude;
     }
 
+    //
+    public void setLatitudeCliente(double latitude) {
+        this.latitude = latitude;
+    }
+    //
+
     public String getBairro() {
         return bairro;
     }

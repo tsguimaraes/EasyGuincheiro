@@ -30,8 +30,8 @@ public class TelaInicial extends AppCompatActivity{
     GuinchoNegocio atual = new GuinchoNegocio();
     public String verificaStatus;
     int idDoGuincheiro = (3)-1; // ID do guincheiro obtido no momento do Login
-    double longitudeLocal = 0.0;
-    double latitudeLocal = 0.0;
+    Double longitudeLocal;
+    Double latitudeLocal;
     int delay = 2000; // intervalo de 2 segundos.
     int period = 30000; // repetir a cada 10 segundos.
     Timer timer = new Timer();
@@ -81,13 +81,13 @@ public class TelaInicial extends AppCompatActivity{
                                 atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
                                 atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
                                 atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
-                                atual.setlatitude(guinchoNegocios.get(i).getlatitude());
+                                atual.setLatitudeCliente(guinchoNegocios.get(i).getlatitude());
                                 atual.setLongitudeCliente(guinchoNegocios.get(i).getLongitude());
 
                                 arrayList.add(atual);
 
-                                longitudeLocal = -23.54585280941764;//guinchoNegocios.get(idDoGuincheiro).getlatitude();
-                                latitudeLocal = -46.641223000000025;//guinchoNegocios.get(idDoGuincheiro).getLongitude();
+                                //longitudeLocal = -23.54585280941764;//guinchoNegocios.get(idDoGuincheiro).getlatitude();
+                                //latitudeLocal = -46.641223000000025;//guinchoNegocios.get(idDoGuincheiro).getLongitude();
                             }
 
                             //Verifica se tem objeto no JSON, não permite passar nulo,
@@ -160,21 +160,53 @@ public class TelaInicial extends AppCompatActivity{
 
     // Retorna latitude e longitude
 
-    public final Double latitude (){
+    public final Double latitude () {
 
-        return -23.54585280941764;
-        //return latitudeLocal;
+        // Chamada da classe JSON
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(url)
+                .build();
+        ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
+        servicoJSON.getGuincho(new Callback<List<GuinchoNegocio>>() {
+            @Override
+            public void success(List<GuinchoNegocio> guinchoNegocios, Response response) {
+
+                // Chama a tela de Recepção de sinistro (aceitação).
+
+                for (int i = 0; i < guinchoNegocios.size(); i++) {
+
+                    atual.setId(guinchoNegocios.get(i).getId());
+                    atual.setModeloGuincho(guinchoNegocios.get(i).getModeloGuincho());
+                    atual.setAnttGuincho(guinchoNegocios.get(i).getAnttGuincho());
+                    atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
+                    atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
+                    atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
+                    atual.setlatitude(guinchoNegocios.get(i).getlatitude());
+                    atual.setLongitudeCliente(guinchoNegocios.get(i).getLongitude());
+
+                    arrayList.add(atual);
+
+                    longitudeLocal = guinchoNegocios.get(idDoGuincheiro).getlatitude();
+                    latitudeLocal = guinchoNegocios.get(idDoGuincheiro).getLongitude();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
+                // E veja a mensagem que o retrofit retorna
+                resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt." + retrofitError.getMessage());
+            }
+
+        });
+        latitudeLocal = -23.54585280941764;
+        return this.latitudeLocal;
     }
+
 
     public final Double longitude (){
 
         return -46.641223000000025;
         //return longitudeLocal;
-    }
-
-    // pra tela de recepção
-    public void mandaParaTelaSinistro(){
-        Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-        startActivity(i);
     }
 }
