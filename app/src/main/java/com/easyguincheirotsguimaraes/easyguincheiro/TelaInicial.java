@@ -124,7 +124,6 @@ public class TelaInicial extends AppCompatActivity{
         }
 
 
-
     public boolean connectInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

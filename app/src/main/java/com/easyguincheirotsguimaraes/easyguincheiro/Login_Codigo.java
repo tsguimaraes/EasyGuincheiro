@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.UserSessionManager;
+
 /* Classe principal de login
  O intuito desta classe e fazer a chamada de validação de login,
  Entrar na tela de recepção de login, ao clicar no botão entrar,
@@ -19,12 +21,14 @@ import android.widget.Toast;
  Para o mantenedor do sistema, cadastre os dados da empresa de guincho e avalie a reputação dela,
  antes de se associar ao Easy Guincho.
 */
-public class Login_Codigo extends AppCompatActivity {
+public class Login_Codigo extends AppCompatActivity /*, AppBaseFragment*/{
+
 
     private Button buttonEntrar;
     EditText codigo; // Código
     //EditText senha;
     TextView textViewName,textViewAge,textViewword;
+    UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,5 +138,70 @@ public class Login_Codigo extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // Login via ws, deve ser feito com fragment, descomentar
+
+    /*
+    private TaskInterface<TaskResponse> taskLogin() {
+        return new TaskInterface<TaskResponse>() {
+            @Override
+            public void doAfter(TaskResponse response) {
+
+                if (response.getSuccess() == 1) {
+                    try {
+                        int id = response.getRecordSet().getInt("id");
+                        String nome = response.getRecordSet().getString("nome");
+                        String email = response.getRecordSet().getString("email");
+
+
+                         // Nova sessão de usuário!
+
+                        session.createLoginSession(id, nome, email);
+
+                        // Iniciar MainActivty enviando uma mensagem de sucesso
+                        Intent intent = new Intent(getContext(), Login_Placa.class);
+                        intent.putExtra("message", response.getMessage());
+                        startActivity(intent);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    AlertDialogManager.showAlertDialog(getContext(), null, response.getMessage(), false);
+                }
+            }
+        };
+    }
+
+
+    // Login via ws
+
+    private View.OnClickListener onClickLogar() {
+
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Iniciar asyncTask
+                TaskWS taskLogin = new TaskWS(getContext(), taskLogin(), "Login");
+
+                // Criar parâmetros de envio
+                Map<String, String> paramsWebService = new HashMap<String, String>();
+                paramsWebService.put("codigo", codigo.getText().toString());
+                //paramsWebService.put("senha", et_senha.getText().toString());
+
+                // Enviar ao web service
+                taskLogin.execute(paramsWebService);
+            }
+        };
+    }
+
+
+
+    // Fim do login pelo ws
+*/
+
 }
+
+
 
