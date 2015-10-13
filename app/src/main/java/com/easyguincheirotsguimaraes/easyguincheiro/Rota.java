@@ -44,6 +44,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
 
     public void onMapReady(GoogleMap map) {
 
+
         //CameraUpdate update = CameraUpdateFactory.newLatLngZoom(LOCATION_BURNABY,BIND_IMPORTANT);// Distância da camera
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL); //Tipo do Mapa
         this.findViewById(R.id.mapView);
@@ -61,6 +62,8 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
         map.addMarker(new MarkerOptions().position(latitudeAtual).title("Localiza"+telaInicial.latitude()));
         // Passa os parametros de latitude longitude e zoom
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeAtual, zoomLevel));
+
+
     }
 
     @Override

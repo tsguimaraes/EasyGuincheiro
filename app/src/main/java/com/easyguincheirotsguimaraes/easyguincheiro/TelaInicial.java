@@ -36,7 +36,8 @@ public class TelaInicial extends AppCompatActivity{
     int period = 30000; // repetir a cada 10 segundos.
     Timer timer = new Timer();
 
-    public final String url = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
+    public final String urlInicio = "guincheiros.json";
+    public final String urlFim = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
@@ -48,6 +49,7 @@ public class TelaInicial extends AppCompatActivity{
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
         resultadoTextView = (TextView) findViewById(R.id.textViewResultado);
@@ -64,7 +66,7 @@ public class TelaInicial extends AppCompatActivity{
 
                     // Chamada da classe JSON
                     RestAdapter restAdapter = new RestAdapter.Builder()
-                            .setEndpoint(url)
+                            .setEndpoint(urlInicio)
                             .build();
                     ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
                     servicoJSON.getGuincho(new Callback<List<GuinchoNegocio>>() {
@@ -121,6 +123,7 @@ public class TelaInicial extends AppCompatActivity{
                     });
                 }
             }, delay, period);
+
         }
 
 
@@ -161,43 +164,6 @@ public class TelaInicial extends AppCompatActivity{
 
     public final Double latitude () {
 
-        // Chamada da classe JSON
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(url)
-                .build();
-        ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
-        servicoJSON.getGuincho(new Callback<List<GuinchoNegocio>>() {
-            @Override
-            public void success(List<GuinchoNegocio> guinchoNegocios, Response response) {
-
-                // Chama a tela de Recepção de sinistro (aceitação).
-
-                for (int i = 0; i < guinchoNegocios.size(); i++) {
-
-                    atual.setId(guinchoNegocios.get(i).getId());
-                    atual.setModeloGuincho(guinchoNegocios.get(i).getModeloGuincho());
-                    atual.setAnttGuincho(guinchoNegocios.get(i).getAnttGuincho());
-                    atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
-                    atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
-                    atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
-                    atual.setlatitude(guinchoNegocios.get(i).getlatitude());
-                    atual.setLongitudeCliente(guinchoNegocios.get(i).getLongitude());
-
-                    arrayList.add(atual);
-
-                    longitudeLocal = guinchoNegocios.get(idDoGuincheiro).getlatitude();
-                    latitudeLocal = guinchoNegocios.get(idDoGuincheiro).getLongitude();
-                }
-
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
-                // E veja a mensagem que o retrofit retorna
-                resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt." + retrofitError.getMessage());
-            }
-
-        });
         latitudeLocal = -23.54585280941764;
         return this.latitudeLocal;
     }
