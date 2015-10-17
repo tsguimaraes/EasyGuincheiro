@@ -1,44 +1,40 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
+// Created by Thiago on 30/08/2015.
+
+
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.ChamadoJSON;
+
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.GET;
-
-
- // Created by Thiago on 30/08/2015.
-
-
-public interface ServicoJSON {
-
-    // Parte final da url
-    //@GET("/clientes/")
-    @GET("/guincheiros.json")
-    void getGuincho(Callback<List<GuinchoNegocio>> callback);
-}
-
-
-/*
-package com.easyguincheirotsguimaraes.easyguincheiro;
-
-import java.util.List;
-
-import retrofit.http.GET;
 import retrofit.http.Path;
-import retrofit.http.Query;
-
-
- // Created by Thiago on 30/08/2015.
 
 public interface ServicoJSON {
 
-    // Parte final da url
-    // @GET("/guincheiros.json")
-    // void getGuincho(Callback<List<GuinchoNegocio>> callback);
+    TelaInicial tel = new TelaInicial();
 
-    @GET("/group/{id}/users")
-    List<Guincheiro> groupList(@Path("id") int groupId, @Query("sort") String sort);
+    //@GET("/g_1/c2_2015_10_14_20_18_36_000000.json")
+     //Call<ChamadoJSON> listRepos();
+    //String teste = tel.getTask();
+
+    //@GET("{id}")
+
+
+    @GET("/{owner}")
+    void getGuincho(
+            @Path("owner") String dynamic,
+            Callback<List<ChamadoJSON>> cb);
+
+
+
+
+    // OK
+    // Parte final da url
+    //@GET("/c2_2015_10_14_20_18_36_000000.json")
+
+    //void getGuincho(Callback<List<ChamadoJSON>> callback);
+
 
 }
-
-*/

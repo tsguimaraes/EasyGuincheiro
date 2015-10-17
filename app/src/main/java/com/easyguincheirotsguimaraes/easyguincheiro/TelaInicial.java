@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.ChamadoJSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +29,24 @@ import retrofit.client.Response;
 
 public class TelaInicial extends AppCompatActivity{
 
+    WebView webView;
     private TextView textViewResultado;
     GuinchoNegocio atual = new GuinchoNegocio();
+    ChamadoJSON chamado = new ChamadoJSON();
     public String verificaStatus;
-    int idDoGuincheiro = (3)-1; // ID do guincheiro obtido no momento do Login
+    int idDoGuincheiro = 6;//(1)-1; // ID do guincheiro obtido no momento do Login
     Double longitudeLocal;
     Double latitudeLocal;
-    int delay = 2000; // intervalo de 2 segundos.
-    int period = 30000; // repetir a cada 10 segundos.
+    int delay = 1000; // intervalo de 2 segundo.
+    int period = 60000; // repetir a cada 10 segundos.
     Timer timer = new Timer();
+    public final String dynamic = "c2_2015_10_14_20_18_36_000000.json";
 
-    public final String urlInicio = "guincheiros.json";
-    public final String urlFim = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
+    //public final String urlFim = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
+    public final String urlFim =   "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/chamados/g_"+idDoGuincheiro;
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
-    ArrayList<GuinchoNegocio> arrayList = new ArrayList<>();
+    ArrayList<ChamadoJSON> arrayList = new ArrayList<>();
 
     //private Button acordar;
 
@@ -53,6 +59,33 @@ public class TelaInicial extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
         resultadoTextView = (TextView) findViewById(R.id.textViewResultado);
+        final String user;
+        /*
+        // Teste
+
+        Gson gson = new GsonBuilder()
+                .create();
+        RequestInterceptor requestInterceptor = new RequestInterceptor() {
+            @Override
+            public void intercept(RequestFacade request) {
+                request.addHeader("Content-Type", "application/json");
+            }
+        };
+        RestAdapter.Builder builder = new RestAdapter.Builder()
+                .setEndpoint(urlFim)
+                .setRequestInterceptor(requestInterceptor)
+                .setConverter(new GsonConverter(gson))
+                .setLogLevel(RestAdapter.LogLevel.FULL);
+
+        RestAdapter restAdapter = builder.build();
+        ServicoJSON servicoJson = restAdapter.create(ServicoJSON.class);
+        */
+        // TESTE
+
+
+
+
+        //leArquivo();
 
             timer.scheduleAtFixedRate(new TimerTask() {
                 // Temporizador
@@ -66,61 +99,65 @@ public class TelaInicial extends AppCompatActivity{
 
                     // Chamada da classe JSON
                     RestAdapter restAdapter = new RestAdapter.Builder()
-                            .setEndpoint(urlInicio)
+                            .setEndpoint(urlFim)
                             .build();
                     ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
-                    servicoJSON.getGuincho(new Callback<List<GuinchoNegocio>>() {
-                        @Override
-                        public void success(List<GuinchoNegocio> guinchoNegocios, Response response) {
+                      //servicoJSON.getGuincho(new Callback<List<ChamadoJSON>>() {
+                        servicoJSON.getGuincho(dynamic,
+                                new Callback<List<ChamadoJSON>>() {
+                                    @Override
+                                    public void success(List<ChamadoJSON> chamadoJSONs, Response response) {
 
-                            // Chama a tela de Recepção de sinistro (aceitação).
+                                        // Chama a tela de Recepção de sinistro (aceitação).
 
-                            for (int i = 0; i < guinchoNegocios.size(); i++) {
+                                        for (int i = 0; i < chamadoJSONs.size(); i++) {
 
-                                atual.setId(guinchoNegocios.get(i).getId());
-                                atual.setModeloGuincho(guinchoNegocios.get(i).getModeloGuincho());
-                                atual.setAnttGuincho(guinchoNegocios.get(i).getAnttGuincho());
-                                atual.setCorGuincho(guinchoNegocios.get(i).getCorGuincho());
-                                atual.setMarcaGuincho(guinchoNegocios.get(i).getMarcaGuincho());
-                                atual.setPlacaGuincho(guinchoNegocios.get(i).getPlacaGuincho());
-                                atual.setLatitudeCliente(guinchoNegocios.get(i).getlatitude());
-                                atual.setLongitudeCliente(guinchoNegocios.get(i).getLongitude());
+                                            chamado.setId(chamadoJSONs.get(i).getId());
+                                            chamado.setEndereco(chamadoJSONs.get(i).getEndereco());
+                                            chamado.setBairro(chamadoJSONs.get(i).getBairro());
+                                            chamado.setNumero(chamadoJSONs.get(i).getNumero());
+                                            chamado.setforma_pagamento(chamadoJSONs.get(i).getforma_pagamento());
+                                            chamado.settempo_chegada(chamadoJSONs.get(i).gettempo_chegada());
+                                            chamado.setdistancia_a_percorrer(chamadoJSONs.get(i).getdistancia_a_percorrer());
+                                            chamado.setveiculo_modelo(chamadoJSONs.get(i).getveiculo_modelo());
 
-                                arrayList.add(atual);
+                                            arrayList.add(chamado);
 
-                                //longitudeLocal = -23.54585280941764;//guinchoNegocios.get(idDoGuincheiro).getlatitude();
-                                //latitudeLocal = -46.641223000000025;//guinchoNegocios.get(idDoGuincheiro).getLongitude();
-                            }
+                                        }
 
-                            //Verifica se tem objeto no JSON, não permite passar nulo,
-                            if (arrayList.size() > 0 && arrayList.size() >= idDoGuincheiro
-                                    && (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
-                                    ((String.valueOf(arrayList.get(idDoGuincheiro).getId())))) {
+                                        //Verifica se tem objeto no JSON, não permite passar nulo,
+                                        /*
+                                        if (arrayList.size() > 0 && arrayList.size() >= idDoGuincheiro &&
+                                                (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
+                                                ((String.valueOf(arrayList.get(idDoGuincheiro).getId())))) {
+                                         */
+                                            //Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
 
-                                //Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
+                                            resultadoTextView.setText(String.valueOf(arrayList.get(0).toString()));
+                                            verificaStatus =
+                                                    "Endereço: "//+chamado.getEndereco() +"\n"
+                                                            + "Bairro: "//+chamado.getBairro() +"\n"
+                                                            + "chegada aproximada: "//+chamado.gettempo_chegada()+"\n"
+                                                            + "Distância:"//+chamado.getdistancia_a_percorrer() +"\n"
+                                                            + "Pagamento: ";//+chamado.getforma_pagamento()+"\n";
 
-                                resultadoTextView.setText(String.valueOf(arrayList.get(idDoGuincheiro).toString()));
-                                verificaStatus =
-                                        "Endereço: Avenida Vital Brasil, 50\n"
-                                                + "Bairro: Butantã \n"
-                                                + "chegada aproximada: 40 Minutos\n"
-                                                + "Distância: 20 km\n"
-                                                + "Pagamento: Dinheiro\n";
+                                            // Chamada da tela de recepçao de sinistro
+                                            Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                                            timer.cancel();
+                                            startActivity(i);
 
-                                // Chamada da tela de recepçao de sinistro
-                                Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
-                                timer.cancel();
-                                startActivity(i);
-                            }
-                        }
+                                    }
 
-                        @Override
-                        public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
-                            // E veja a mensagem que o retrofit retorna
-                            resultadoTextView.setText("Sem acesso a internet, verifique a sua conexão com a internt." + retrofitError.getMessage());
-                        }
+                                    @Override
+                                    public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
+                                        // E veja a mensagem que o retrofit retorna
+                                        //Intent i = new Intent(TelaInicial.this, TelaInicial.class);
+                                        //startActivity(i);
+                                        resultadoTextView.setText("Erro: " + retrofitError.getMessage());
+                                        run();
+                                    }
 
-                    });
+                                });
                 }
             }, delay, period);
 
@@ -173,5 +210,9 @@ public class TelaInicial extends AppCompatActivity{
 
         return -46.641223000000025;
         //return longitudeLocal;
+    }
+    public String getTask(){
+
+        return "c2_2015_10_14_20_18_36_000000.json";
     }
 }
