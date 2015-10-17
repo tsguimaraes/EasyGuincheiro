@@ -33,7 +33,6 @@ public class TelaInicial extends AppCompatActivity{
     private TextView textViewResultado;
     GuinchoNegocio atual = new GuinchoNegocio();
     ChamadoJSON chamado = new ChamadoJSON();
-    public String verificaStatus;
     int idDoGuincheiro = 6;//(1)-1; // ID do guincheiro obtido no momento do Login
     Double longitudeLocal;
     Double latitudeLocal;
@@ -41,12 +40,15 @@ public class TelaInicial extends AppCompatActivity{
     int period = 60000; // repetir a cada 10 segundos.
     Timer timer = new Timer();
     public final String dynamic = "c2_2015_10_14_20_18_36_000000.json";
+    public String jsonFile="";
+
 
     //public final String urlFim = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
     public final String urlFim =   "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/chamados/g_"+idDoGuincheiro;
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<ChamadoJSON> arrayList = new ArrayList<>();
+
 
     //private Button acordar;
 
@@ -60,32 +62,13 @@ public class TelaInicial extends AppCompatActivity{
         setContentView(R.layout.activity_tela_inicial);
         resultadoTextView = (TextView) findViewById(R.id.textViewResultado);
         final String user;
-        /*
-        // Teste
 
-        Gson gson = new GsonBuilder()
-                .create();
-        RequestInterceptor requestInterceptor = new RequestInterceptor() {
-            @Override
-            public void intercept(RequestFacade request) {
-                request.addHeader("Content-Type", "application/json");
-            }
-        };
-        RestAdapter.Builder builder = new RestAdapter.Builder()
-                .setEndpoint(urlFim)
-                .setRequestInterceptor(requestInterceptor)
-                .setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.FULL);
-
-        RestAdapter restAdapter = builder.build();
-        ServicoJSON servicoJson = restAdapter.create(ServicoJSON.class);
-        */
         // TESTE
 
 
 
 
-        //leArquivo();
+        // Método de leitura de JSON Chamado
 
             timer.scheduleAtFixedRate(new TimerTask() {
                 // Temporizador
@@ -102,8 +85,8 @@ public class TelaInicial extends AppCompatActivity{
                             .setEndpoint(urlFim)
                             .build();
                     ServicoJSON servicoJSON = restAdapter.create(ServicoJSON.class);  // Chamada da classe de interface JSON que é passado qual arquivo retrofit
-                      //servicoJSON.getGuincho(new Callback<List<ChamadoJSON>>() {
-                        servicoJSON.getGuincho(dynamic,
+
+                        servicoJSON.getGuincho(dynamic,//Variavel com o final da url declarada como final e public acima
                                 new Callback<List<ChamadoJSON>>() {
                                     @Override
                                     public void success(List<ChamadoJSON> chamadoJSONs, Response response) {
@@ -125,24 +108,15 @@ public class TelaInicial extends AppCompatActivity{
 
                                         }
 
-                                        //Verifica se tem objeto no JSON, não permite passar nulo,
-                                        /*
-                                        if (arrayList.size() > 0 && arrayList.size() >= idDoGuincheiro &&
-                                                (String.valueOf(arrayList.get(idDoGuincheiro).getId())).equals
-                                                ((String.valueOf(arrayList.get(idDoGuincheiro).getId())))) {
-                                         */
+
                                             //Exibe apenas o arquivo JSON com o ID do guincheiro no parametro idDoGuincheiro
 
                                             resultadoTextView.setText(String.valueOf(arrayList.get(0).toString()));
-                                            verificaStatus =
-                                                    "Endereço: "//+chamado.getEndereco() +"\n"
-                                                            + "Bairro: "//+chamado.getBairro() +"\n"
-                                                            + "chegada aproximada: "//+chamado.gettempo_chegada()+"\n"
-                                                            + "Distância:"//+chamado.getdistancia_a_percorrer() +"\n"
-                                                            + "Pagamento: ";//+chamado.getforma_pagamento()+"\n";
+
 
                                             // Chamada da tela de recepçao de sinistro
                                             Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                                            i.putExtra(String.valueOf(arrayList.get(0).toString()),resultadoTextView.toString());
                                             timer.cancel();
                                             startActivity(i);
 
@@ -160,6 +134,8 @@ public class TelaInicial extends AppCompatActivity{
                                 });
                 }
             }, delay, period);
+
+        // Fim do método de leitura do JSON chamado
 
         }
 
@@ -211,8 +187,6 @@ public class TelaInicial extends AppCompatActivity{
         return -46.641223000000025;
         //return longitudeLocal;
     }
-    public String getTask(){
 
-        return "c2_2015_10_14_20_18_36_000000.json";
-    }
+
 }

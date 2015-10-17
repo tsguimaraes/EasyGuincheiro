@@ -1,31 +1,40 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class RecepcaoDeSinistro extends AppCompatActivity {
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.ChamadoJSON;
+
+public class RecepcaoDeSinistro extends AppCompatActivity{
     private Button aceitoSolicitacao;
     private Button naoAceitoSolicitacao;
     TextView recepcaoView;
+    ChamadoJSON chamadoJSON = new ChamadoJSON();
+    public String redundante = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recepcao_de_sinistro);
         recepcaoView = (TextView) findViewById(R.id.recepcao);
+
+        ChamadoJSON chamadoJSON = new ChamadoJSON();
+
         // Dados do solicitante
-        recepcaoView.setText(
+        recepcaoView.setText(chamadoJSON.toString()
+                /*
                 "Endereço: Avenida Vital Brasil, 50\n"
                 +"Bairro: Butantã \n"
                 +"chegada aproximada: 40 Minutos\n"
                 +"Distância: 20 km\n"
                 +"Pagamento: Dinheiro\n"
+                */
         );
 
         //TelaInicial tlIni = new TelaInicial();
@@ -82,4 +91,5 @@ public class RecepcaoDeSinistro extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

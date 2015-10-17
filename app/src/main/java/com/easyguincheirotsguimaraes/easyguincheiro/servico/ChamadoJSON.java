@@ -183,11 +183,11 @@ public class ChamadoJSON {
 
     @Override
     public String toString() {
-        return "ChamadoJSON{" +
-                "id=" + id +
+        return //"ChamadoJSON" + '\n' +
+                "id=" + id + '\n' +
                 ", endereco='" + endereco + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", numero='" + numero + '\'' +
+                ", bairro=" + bairro + '\'' +
+                ", numero=" + numero + '\'' +
                 ", forma_pagamento='" + forma_pagamento + '\'' +
                 ", tempo_chegada='" + tempo_chegada + '\'' +
                 ", distancia_a_percorrer='" + distancia_a_percorrer + '\'' +

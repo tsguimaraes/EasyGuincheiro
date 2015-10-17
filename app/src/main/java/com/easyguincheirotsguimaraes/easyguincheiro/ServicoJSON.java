@@ -13,28 +13,13 @@ import retrofit.http.Path;
 
 public interface ServicoJSON {
 
-    TelaInicial tel = new TelaInicial();
-
-    //@GET("/g_1/c2_2015_10_14_20_18_36_000000.json")
-     //Call<ChamadoJSON> listRepos();
-    //String teste = tel.getTask();
-
-    //@GET("{id}")
-
-
+    // Recebe o parametro do ws
     @GET("/{owner}")
-    void getGuincho(
+    void getGuincho(//owner é o final da url estabelicido como parametro
             @Path("owner") String dynamic,
             Callback<List<ChamadoJSON>> cb);
+    //FIM
 
-
-
-
-    // OK
-    // Parte final da url
-    //@GET("/c2_2015_10_14_20_18_36_000000.json")
-
-    //void getGuincho(Callback<List<ChamadoJSON>> callback);
 
 
 }
