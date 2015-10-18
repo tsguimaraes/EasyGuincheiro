@@ -36,15 +36,15 @@ public class TelaInicial extends AppCompatActivity{
     int idDoGuincheiro = 6;//(1)-1; // ID do guincheiro obtido no momento do Login
     Double longitudeLocal;
     Double latitudeLocal;
-    int delay = 1000; // intervalo de 2 segundo.
-    int period = 60000; // repetir a cada 10 segundos.
+    int delay = 5000; // intervalo de x segundo.
+    int period = 60000; // repetir a cada x segundos.
     Timer timer = new Timer();
     public final String dynamic = "c2_2015_10_14_20_18_36_000000.json";
     public String jsonFile="";
 
 
     //public final String urlFim = "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/";
-    public final String urlFim =   "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/chamados/g_"+idDoGuincheiro;
+    public final String urlFim =   "http://tcceasyguincho.esy.es/EasyGuinchoWS/json/chamados_realizados/g_"+idDoGuincheiro;
 
     TextView resultadoTextView; // Texto da mensagem, por enquanto somente para teste
     ArrayList<ChamadoJSON> arrayList = new ArrayList<>();
@@ -65,7 +65,10 @@ public class TelaInicial extends AppCompatActivity{
 
         // TESTE
 
-
+        if (!connectInternet()) {
+            Toast.makeText(TelaInicial.this, "Verifique a sua conexão", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         // Método de leitura de JSON Chamado
@@ -73,12 +76,6 @@ public class TelaInicial extends AppCompatActivity{
             timer.scheduleAtFixedRate(new TimerTask() {
                 // Temporizador
                 public void run() {
-
-                    // Verifica se há conexão
-                    if (!connectInternet()) {
-                        Toast.makeText(TelaInicial.this, "Verifique a sua conexão", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
 
                     // Chamada da classe JSON
                     RestAdapter restAdapter = new RestAdapter.Builder()
@@ -125,10 +122,10 @@ public class TelaInicial extends AppCompatActivity{
                                     @Override
                                     public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
                                         // E veja a mensagem que o retrofit retorna
-                                        //Intent i = new Intent(TelaInicial.this, TelaInicial.class);
-                                        //startActivity(i);
-                                        resultadoTextView.setText("Erro: " + retrofitError.getMessage());
-                                        run();
+                                        //resultadoTextView.setText("Erro: " + retrofitError.getMessage());
+                                        Intent i = new Intent(TelaInicial.this, TelaInicial.class);
+                                        startActivity(i);
+
                                     }
 
                                 });

@@ -24,6 +24,11 @@ public class ChamadoJSON {
     String modelo;
     String cor;
     String placa;
+    String file_chamado = "";
+    int aceitou = 0;
+    int idAcesso = 0; // será o id do guincheiro
+    int idCliente = 0; // Virá do retrofit
+    String classRequest = "";
 
 
     //"forma_pagamento":"cartao","tempo_chegada":"23 minutos","distancia_a_percorrer":"12.1 km","veiculo"
@@ -181,18 +186,56 @@ public class ChamadoJSON {
         this.placa = placa;
     }
 
+    public String getFile_chamado() {
+        return file_chamado;
+    }
+
+    public void setFile_chamado(String file_chamado) {
+        this.file_chamado = file_chamado;
+    }
+
+    public int getaceitou() {
+        return aceitou;
+    }
+
+    public void setaceitou(int aceitou) {
+        this.aceitou = aceitou;
+    }
+
+    public int getIdAcesso() {
+        return idAcesso;
+    }
+
+    public void setIdAcesso(int idAcesso) {
+        this.idAcesso = idAcesso;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getClassRequest() {
+        return classRequest;
+    }
+
+    public void setClassRequest(String classRequest) {
+        this.classRequest = classRequest;
+    }
+
     @Override
     public String toString() {
         return //"ChamadoJSON" + '\n' +
-                "id=" + id + '\n' +
-                ", endereco='" + endereco + '\'' +
-                ", bairro=" + bairro + '\'' +
-                ", numero=" + numero + '\'' +
-                ", forma_pagamento='" + forma_pagamento + '\'' +
-                ", tempo_chegada='" + tempo_chegada + '\'' +
-                ", distancia_a_percorrer='" + distancia_a_percorrer + '\'' +
-                ", veiculo_modelo='" + veiculo_modelo + '\'' +
-                '}';
+                "endereco: " + endereco + '\n' +
+                "bairro: " + bairro + '\n' +
+                "numero: " + numero + '\n' +
+                "forma_pagamento: " + forma_pagamento + '\n' +
+                "tempo_chegada: " + tempo_chegada + '\n' +
+                "distancia_a_percorrer: " + distancia_a_percorrer + '\n' +
+                "veiculo_modelo: " + veiculo_modelo;
 
         /*
 

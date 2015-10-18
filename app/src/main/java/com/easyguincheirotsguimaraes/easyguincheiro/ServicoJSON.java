@@ -18,8 +18,6 @@ public interface ServicoJSON {
     void getGuincho(//owner é o final da url estabelicido como parametro
             @Path("owner") String dynamic,
             Callback<List<ChamadoJSON>> cb);
-    //FIM
-
 
 
 }

@@ -8,15 +8,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easyguincheirotsguimaraes.easyguincheiro.servico.ChamadoJSON;
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.SinistroJSON;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class RecepcaoDeSinistro extends AppCompatActivity{
     private Button aceitoSolicitacao;
     private Button naoAceitoSolicitacao;
     TextView recepcaoView;
     ChamadoJSON chamadoJSON = new ChamadoJSON();
-    public String redundante = "";
+    // Retrofit gera requisição ao servidor
+    String file_chamado = "teste";
+    int aceitou = 1;
+    int idAcesso = 8; // será o id do guincheiro
+    int idCliente = 1; // Virá do retrofit
+    String classRequest = "teste2";
+    public final String ENDPOINT = "http://tcceasyguincho.esy.es/EasyGuinchoWS";
+    public static final int NETWORK_STATE_REGISTER=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +38,7 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
         setContentView(R.layout.activity_recepcao_de_sinistro);
         recepcaoView = (TextView) findViewById(R.id.recepcao);
 
-        ChamadoJSON chamadoJSON = new ChamadoJSON();
+
 
         // Dados do solicitante
         recepcaoView.setText(chamadoJSON.toString()
@@ -37,19 +51,61 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
                 */
         );
 
-        //TelaInicial tlIni = new TelaInicial();
-        // Teste para trazer dados da tela inicial para sinistro
-        //recepcaoView.setText(tlIni.mandaParaTelaSinistro());
-        // Tem por objetivo executar, aceitar a requisição.
-
         // Chamada de tela Sinistro ao aceitar a solicitação de guincho por parte do guincheiro
         aceitoSolicitacao = (Button) findViewById(R.id.buttonAceito);
         aceitoSolicitacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*
                 Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
                 startActivity(intent);
                 v.animate();
+                */
+
+                //retrofit tworzenie polecenia
+
+                RestAdapter adapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .build();
+
+                //tworzenie api klasy flowers
+                SinistroJSON api = adapter.create(SinistroJSON.class);
+
+
+                api.respostaGuincheiro(
+                        file_chamado
+                        ,aceitou
+                        ,idAcesso
+                        ,idCliente
+                        ,classRequest
+                        ,new Callback<ChamadoJSON>() {
+
+                    @Override
+                    public void failure(final RetrofitError error) {
+                        //android.util.Log.i("example", "Error, body: " + error.getBody().toString());
+                        Toast.makeText(RecepcaoDeSinistro.this, "Erro:"+ error.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void success(ChamadoJSON resposta, Response response) {
+                        // Do something with the User object returned
+                        //Log.d("hello", response.toString());
+                        Toast.makeText(RecepcaoDeSinistro.this, "OK!!:", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
+                        startActivity(intent);
+                       // Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
+                       // startActivity(intent);
+
+
+
+                    }
+                });
+
+
+         // Fim
+
 
             }
         });
