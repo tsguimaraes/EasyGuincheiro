@@ -23,6 +23,7 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
     private Button naoAceitoSolicitacao;
     TextView recepcaoView;
     ChamadoJSON chamadoJSON = new ChamadoJSON();
+    RetornoJSON retornoJSON = new RetornoJSON();
     // Retrofit gera requisição ao servidor
     String file_chamado = "teste";
     int aceitou = 1;
@@ -30,7 +31,6 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
     int idCliente = 1; // Virá do retrofit
     String classRequest = "teste2";
     public final String ENDPOINT = "http://tcceasyguincho.esy.es/EasyGuinchoWS";
-    public static final int NETWORK_STATE_REGISTER=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,8 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
                     public void failure(final RetrofitError error) {
                         //android.util.Log.i("example", "Error, body: " + error.getBody().toString());
                         Toast.makeText(RecepcaoDeSinistro.this, "Erro:"+ error.getMessage(), Toast.LENGTH_LONG).show();
-
+                        Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
+                        startActivity(intent);
                     }
 
                     @Override

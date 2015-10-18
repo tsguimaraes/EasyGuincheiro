@@ -39,7 +39,7 @@ public class TelaInicial extends AppCompatActivity{
     int delay = 5000; // intervalo de x segundo.
     int period = 60000; // repetir a cada x segundos.
     Timer timer = new Timer();
-    public final String dynamic = "c2_2015_10_14_20_18_36_000000.json";
+    public final String dynamic = "c1_2015_10_18_20_16_31_000000.json";
     public String jsonFile="";
 
 
