@@ -32,8 +32,8 @@ public class WebServiceApp extends Application {
     }
 
     public static String getURL() {
-        //return "http://tcceasyguincho.esy.es/EasyGuinchoWS/index.php";
-        return "http://10.0.3.2:3310/EasyGuinchoWS/index.php";
+        return "http://tcceasyguincho.esy.es/EasyGuinchoWS/index.php";
+        //return "http://10.0.3.2:3310/EasyGuinchoWS/index.php";
     }
 
 

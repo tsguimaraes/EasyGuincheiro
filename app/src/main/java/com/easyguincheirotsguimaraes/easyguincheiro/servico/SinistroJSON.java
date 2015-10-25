@@ -11,7 +11,7 @@ import retrofit.http.POST;
 public interface SinistroJSON {
 
     @FormUrlEncoded
-    @POST("/index.ph")
+    @POST("/index.php")
     void respostaGuincheiro(
             @Field("file_chamado") String file_chamado
             ,@Field("aceitou") int aceitou

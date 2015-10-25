@@ -3,6 +3,7 @@ package com.easyguincheirotsguimaraes.easyguincheiro.servico;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.EditText;
 
 import com.easyguincheirotsguimaraes.easyguincheiro.Login_Codigo;
 
@@ -35,10 +36,11 @@ public class UserSessionManager {
     public static final String KEY_ID = "id";
 
     // User name (make variable public to access from outside)
-    public static final String KEY_NAME = "name";
+    public static final String KEY_CODIGO = "idTB_ACESSO_GUINCHEIRO";
 
-    // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
+
+    // User name (make variable public to access from outside)
+    public static final String KEY_PLACA = "idTB_VEICULO_GUINCHO";
 
 
     // Constructor
@@ -60,7 +62,7 @@ public class UserSessionManager {
     /**
      * Create login session
      */
-    public void createLoginSession(int id, String name, String email) {
+    public void createLoginSession(int id, EditText codigo, String placa) {
 
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
@@ -69,10 +71,10 @@ public class UserSessionManager {
         editor.putInt(KEY_ID, id);
 
         // Storing name in pref
-        editor.putString(KEY_NAME, name);
 
-        // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_CODIGO, codigo.getText().toString());
+
+        editor.putString(KEY_PLACA, placa);
 
         // commit changes
         editor.commit();
@@ -88,10 +90,10 @@ public class UserSessionManager {
         user.put(KEY_ID, String.valueOf(pref.getInt(KEY_ID, 0)));
 
         // user name
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+        user.put(KEY_CODIGO, pref.getString(KEY_CODIGO, null));
 
         // user email id
-        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+        user.put(KEY_PLACA, pref.getString(KEY_PLACA, null));
 
         // return user
         return user;

@@ -1,5 +1,6 @@
 package com.easyguincheirotsguimaraes.easyguincheiro.servico;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +13,7 @@ public class TaskResponse {
 
     private String message;
     private int success;
-    private JSONObject recordSet;
+    private JSONArray recordSet;
 
 
     /**
@@ -23,28 +24,31 @@ public class TaskResponse {
      */
     public static TaskResponse parserJSON(String json) throws IOException {
 
+        TaskResponse r = new TaskResponse();
+
         try {
-            JSONObject jsonObject = new JSONObject(json);
+            if (json != null) {
+                JSONObject jsonObject = new JSONObject(json);
 
-            // recebe parâmetros de resposta do ws
-            String message = jsonObject.getString("message");
-            int success = jsonObject.getInt("success");
-            String rs_json = jsonObject.getString("recordSet");
+                // recebe parâmetros de resposta do ws
+                String message = jsonObject.getString("message");
+                int success = jsonObject.getInt("success");
+                String rs_json = jsonObject.getString("recordSet");
 
-            // salva o json do rs
-            JSONObject recordSet = new JSONObject(rs_json);
+                // salva o json do rs
+                //JSONObject recordSet = new JSONObject(rs_json);
+                JSONArray recordSet = new JSONArray(rs_json);
 
-            // gravar valores no objeto taskRespose
-            TaskResponse r = new TaskResponse();
-            r.setMessage(message);
-            r.setSuccess(success);
-            r.setRecordSet(recordSet);
-
-            return r;
+                // gravar valores no objeto taskRespose
+                r.setMessage(message);
+                r.setSuccess(success);
+                r.setRecordSet(recordSet);
+            }
 
         } catch (JSONException e){
             throw new IOException(e.getMessage(), e);
         }
+        return r;
     }
 
 
@@ -64,11 +68,11 @@ public class TaskResponse {
         this.success = success;
     }
 
-    public JSONObject getRecordSet() {
+    public JSONArray getRecordSet() {
         return recordSet;
     }
 
-    private void setRecordSet(JSONObject recordSet) {
+    private void setRecordSet(JSONArray recordSet) {
         this.recordSet = recordSet;
     }
 }

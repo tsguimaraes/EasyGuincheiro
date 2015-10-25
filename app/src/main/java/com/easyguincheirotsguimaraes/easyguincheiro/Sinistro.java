@@ -65,6 +65,7 @@ public class Sinistro extends AppCompatActivity {
         });
 
         // Chama tela de rota para abrir o maps
+        /*
         mapsButton = (Button) findViewById(R.id.buttonMaps);
         mapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ public class Sinistro extends AppCompatActivity {
 
             }
         });
-
+        */
 
     }
 

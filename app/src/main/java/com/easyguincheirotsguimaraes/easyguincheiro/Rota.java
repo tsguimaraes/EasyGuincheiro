@@ -12,7 +12,6 @@ import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Rota extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback{
 
@@ -21,7 +20,7 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
     private static final String TAG = "livroandroid";
     float zoomLevel = 16;
 
-    TelaInicial telaInicial = new TelaInicial();
+    //TelaInicial telaInicial = new TelaInicial();
     GuinchoNegocio guinchoNegocio = new GuinchoNegocio();
 
     @Override
@@ -53,13 +52,15 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
         map.setMyLocationEnabled(true);
         // Marcador apontando para a USP/
         //  telaInicial.longitudeLocal
-        //LatLng latitudeAtual = new LatLng(-23.54585280941764, -46.641223000000025);
+        LatLng latitudeAtual = new LatLng(-23.54585280941764, -46.641223000000025);
         // Pegando a posição do JSON
         //Toast.makeText(this, "Latitude"+telaInicial.latitudeLocal+"Longitude"+telaInicial.longitudeLocal, Toast.LENGTH_SHORT).show();
         //*** Teste para pegar direto do JSON ***
-        LatLng latitudeAtual = new LatLng(telaInicial.latitude(), telaInicial.longitude());
+
+        //LatLng latitudeAtual = new LatLng(telaInicial.latitude(), telaInicial.longitude());
         //map.addMarker(new MarkerOptions().position(latitudeAtual).title("Seu destino, clique na seta para traçar a rota."+telaInicial.latitude()));
-        map.addMarker(new MarkerOptions().position(latitudeAtual).title("Localiza"+telaInicial.latitude()));
+
+        //map.addMarker(new MarkerOptions().position(latitudeAtual).title("Localiza"+telaInicial.latitude()));
         // Passa os parametros de latitude longitude e zoom
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeAtual, zoomLevel));
 
@@ -75,4 +76,5 @@ public class Rota extends AppCompatActivity implements OnMapReadyCallback,Google
     public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
 
     }
+
 }

@@ -1,0 +1,6 @@
+$post["file_chamado"]; // ex: c1_2015_10_14_19_18_58_000000.json
+$post["aceitou"]; // 1 ou 0
+$post["idAcesso"]; // ex: 1 - (identifica o guincheiro e o veiculo de guincho)
+$post["idCliente"]; // ex: 2
+$post['classRequest'] = "RespostaGuincheiro"
+a url vai ser sempre essa: http://tcceasyguincho.esy.es/EasyGuinchoWS/index.php

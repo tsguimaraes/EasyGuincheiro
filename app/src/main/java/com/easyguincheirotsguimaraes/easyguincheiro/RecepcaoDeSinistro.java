@@ -1,5 +1,6 @@
 package com.easyguincheirotsguimaraes.easyguincheiro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easyguincheirotsguimaraes.easyguincheiro.servico.ChamadoJSON;
-import com.easyguincheirotsguimaraes.easyguincheiro.servico.SinistroJSON;
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.TaskInterface;
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.TaskResponse;
+import com.easyguincheirotsguimaraes.easyguincheiro.servico.TaskWS;
 
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecepcaoDeSinistro extends AppCompatActivity{
     private Button aceitoSolicitacao;
@@ -30,7 +30,9 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
     int idAcesso = 8; // será o id do guincheiro
     int idCliente = 1; // Virá do retrofit
     String classRequest = "teste2";
-    public final String ENDPOINT = "http://tcceasyguincho.esy.es/EasyGuinchoWS";
+    public final String ENDPOINT = "http://tcceasyguincho.esy.es/EasyGuinchoWS/index.php/";
+
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,55 +60,31 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
             public void onClick(View v) {
 
                 /*
+                String responseJson = HttpHelper.doPost(requestURL, paramsWS, "UTF-8");
+                Map paramsWS = new HashMap<String,String>();
+                paramWS.put("aceitou","1");
+                paramWS.put("idCliente","2");
+                */
+
+                /*
                 Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
                 startActivity(intent);
                 v.animate();
                 */
 
-                //retrofit tworzenie polecenia
+                TaskWS taskRespostaGuincheiro = new TaskWS(context, taskResposta(), "RespostaGuinhceiro");
 
-                RestAdapter adapter = new RestAdapter.Builder()
-                        .setEndpoint(ENDPOINT)
-                        .build();
+                Map paramsWS = new HashMap<String,String>();
 
-                //tworzenie api klasy flowers
-                SinistroJSON api = adapter.create(SinistroJSON.class);
+                paramsWS.put("file_chamado","c1_2015_10_18_22_58_19_000000.json");
+                paramsWS.put("aceitou","1");
+                paramsWS.put("idCliente","2");
+                paramsWS.put("idAcesso","8");
 
-
-                api.respostaGuincheiro(
-                        file_chamado
-                        ,aceitou
-                        ,idAcesso
-                        ,idCliente
-                        ,classRequest
-                        ,new Callback<ChamadoJSON>() {
-
-                    @Override
-                    public void failure(final RetrofitError error) {
-                        //android.util.Log.i("example", "Error, body: " + error.getBody().toString());
-                        Toast.makeText(RecepcaoDeSinistro.this, "Erro:"+ error.getMessage(), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void success(ChamadoJSON resposta, Response response) {
-                        // Do something with the User object returned
-                        //Log.d("hello", response.toString());
-                        Toast.makeText(RecepcaoDeSinistro.this, "OK!!:", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
-                        startActivity(intent);
-                       // Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
-                       // startActivity(intent);
-
-
-
-                    }
-                });
-
-
-         // Fim
-
+                taskRespostaGuincheiro.execute(paramsWS);
+                Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
+                startActivity(intent);
+                v.animate();
 
             }
         });
@@ -147,6 +125,22 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private TaskInterface<TaskResponse> taskResposta() {
+
+        return new TaskInterface<TaskResponse>() {
+
+            @Override
+            public void doAfter(TaskResponse response) {
+
+                if (response.getSuccess() == 1) {
+                    Intent intent = new Intent(context, Sinistro.class);
+                    startActivity(intent);
+                }
+            }
+        };
     }
 
 }
