@@ -30,18 +30,35 @@ public class Avaliacao extends ActionBarActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.3));
+        getWindow().setLayout((int) (width * .8), (int) (height * .3));
 
     }
 
     public void addListenerOnRatingBar() {
+
         ratingBar = (RatingBar) findViewById(R.id.dialog_ratingbar);
-        //txtValorAvaliacao = (TextView) findViewById(R.id.rank_dialog_text1);
+        txtValorAvaliacao = (TextView) findViewById(R.id.rank_dialog_text1);
         // se o valor de avaliação mudar,
         // exiba o valor de avaliação atual no resultado (textview) automaticamente
+
         ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar ratingBar, float avaliacao, boolean fromUser) {
-                //txtValorAvaliacao.setText(String.valueOf(avaliacao));
+
+                if (avaliacao == 1.0) {
+                    txtValorAvaliacao.setText(String.valueOf("Muito ruim!"));
+                }
+                if (avaliacao == 2.0) {
+                    txtValorAvaliacao.setText(String.valueOf("Regular!"));
+                }
+                if (avaliacao == 3.0) {
+                    txtValorAvaliacao.setText(String.valueOf("Bom!"));
+                }
+                if (avaliacao == 4.0) {
+                    txtValorAvaliacao.setText(String.valueOf("Muito bom!"));
+                }
+                if (avaliacao == 5.0) {
+                    txtValorAvaliacao.setText(String.valueOf("Excelente!"));
+                }
             }
         });
     }
@@ -55,7 +72,7 @@ public class Avaliacao extends ActionBarActivity {
             @Override public void onClick(View v) {
                 //Valor da variável
                 /*
-                Toast.makeText(MyAndroidAppActivity.this,String.valueOf(ratingBar.getRating()),
+                Toast.makeText(Avaliacao.this,String.valueOf(ratingBar.getRating()),
                         Toast.LENGTH_SHORT).show();
                         */
                 Intent intent = new Intent(Avaliacao.this, TelaInicial.class);

@@ -6,9 +6,10 @@
     android:padding="2dip"
     android:weightSum="1"
     android:baselineAligned="false"
-    android:background="#fcf8f8">
+    android:background="#faf8f8">
 
     <TextView android:text="" android:id="@+id/rank_dialog_text1"
+        android:textColor="#0fa90f"
         android:textSize="24dp" android:layout_marginTop="10dp"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="center"/>
@@ -18,7 +19,7 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:clickable="true"
         android:id="@+id/dialog_ratingbar" android:layout_gravity="center"
-        android:numStars="5" android:stepSize="1.0" android:rating="2"
+        android:numStars="5" android:stepSize="1.0" android:rating="0"
         android:isIndicator="false"
         android:background="#15be12" />
 
