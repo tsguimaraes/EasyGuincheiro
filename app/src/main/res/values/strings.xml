@@ -12,4 +12,5 @@
     <string name="title_activity_manutencao_guincho">Manutencao de Guincho</string>
     <string name="title_activity_cadastro_frota">Cadastro de Frota</string>
     <string name="title_activity_consulta_guincho_frota">Consulta frota de Guincho</string>
+    <string name="title_activity_activity_avaliacao">Avaliação</string>
 </resources>

@@ -73,6 +73,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easyguincheirotsguimaraes.easyguincheiro.Sinistro" />
         </activity>
+        <activity
+            android:name=".Avaliacao"
+            android:theme="@style/Theme.AppCompat.NoActionBar.CustomTheme"
+            android:label="@string/title_activity_activity_avaliacao" >
+        </activity>
     </application>
 
 </manifest>

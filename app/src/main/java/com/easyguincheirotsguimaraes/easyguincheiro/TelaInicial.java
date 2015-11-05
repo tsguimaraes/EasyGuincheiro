@@ -134,7 +134,9 @@ public class TelaInicial extends AppCompatActivity{
                                     public void failure(RetrofitError retrofitError) {// Caso ocorra o erro abaixo, habilitar a mensagem retrofitError.getMessage()); na mensagem abaixo
                                         // E veja a mensagem que o retrofit retorna
                                         resultadoTextView.setText("Erro: " + retrofitError.getMessage());
-                                        Intent i = new Intent(TelaInicial.this, TelaInicial.class);
+                                        // Mudança para testar avaliacao
+                                        Intent i = new Intent(TelaInicial.this, RecepcaoDeSinistro.class);
+                                        timer.cancel();
                                         startActivity(i);
 
                                     }

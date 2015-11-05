@@ -82,6 +82,7 @@ public class RecepcaoDeSinistro extends AppCompatActivity{
                 paramsWS.put("idAcesso","8");
 
                 taskRespostaGuincheiro.execute(paramsWS);
+
                 Intent intent = new Intent(RecepcaoDeSinistro.this, Sinistro.class);
                 startActivity(intent);
                 v.animate();

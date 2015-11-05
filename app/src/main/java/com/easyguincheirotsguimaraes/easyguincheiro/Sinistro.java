@@ -49,8 +49,8 @@ public class Sinistro extends AppCompatActivity {
         cancelarSolicitacao = (Button) findViewById(R.id.buttonCancelar);
         cancelarSolicitacao.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Sinistro.this, TelaInicial.class);
+            public void onClick(View v) { //TelaInicial
+                Intent intent = new Intent(Sinistro.this, Avaliacao.class);
                 startActivity(intent);
                 v.animate();
                 // Implementar mais de 3 cancelamentos por dia.
